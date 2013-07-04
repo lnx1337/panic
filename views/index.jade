@@ -116,7 +116,7 @@ block content
            
 
         }
-          
+          /*
              var socket  = io.connect('http://lnx1337.cloudapp.net/');
              socket.on('list', function(data) {
                  if(photoOverlay.length>0){
@@ -131,29 +131,30 @@ block content
             });
 
             socket.on('refresh', function(data) {
-                                  /*
-                 if(photoOverlay.length>0){
-                   var i=0;
+                                  
+                 //if(photoOverlay.length>0){
+                   //var i=0;
 
-                     for(i=0;i<=photoOverlay.length;i++){
+                     // for(i=0;i<=photoOverlay.length;i++){
                         //   photoOverlay[i].setMap(null);
-                      }
-                  }
-                  */
-                 addMarker(JSON.parse(data));     
+                     // }
+                 // }
+                  
+                // addMarker(JSON.parse(data));     
                 
              
             });
+            */
 
-
-
-
+          /*
           var socket  = io.connect('http://lnx1337.cloudapp.net/');
           
                $('#refre').click(function() {           
                           socket.emit('refresh');
                  return false; 
                });
+
+               */
           
           $(".abonado").live('click',function(){
                 
