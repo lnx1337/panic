@@ -28,6 +28,7 @@ if ('development' == app.get('env')) {
 }
 
 
+/*
 var Db = require('mysql-activerecord');
 var db = new Db.Adapter({
     server: 'localhost',
@@ -36,7 +37,7 @@ var db = new Db.Adapter({
     database: 'panic'
 });
 
-
+*/
 
 
 
@@ -72,6 +73,7 @@ app.get('/abonado/:id',routes.abonado);
 app.get('/abonados', user.list);
 app.post('/',function(req,res){
 
+     /*
       var cabonado_id=req.body.abonado_id;
       var calert_type_id=req.body.alert_type_id;
       var clatitude=req.body.latitude;
@@ -95,6 +97,7 @@ app.post('/',function(req,res){
         });
 
       }
+      */
 
 });
 app.post('/login',routes.login);
