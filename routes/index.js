@@ -17,7 +17,6 @@ var db = new Db.Adapter({
 
 exports.index = function(req, res){
 
-  res.send("PUTO");
 /* var data= db.count('tbl_medicos',function(data){console.log(data);});*/
  //db.select('id,nomCompleto').get('tbl_medicos',function(err,data){ console.log(data); }); 
 
@@ -34,6 +33,8 @@ exports.index = function(req, res){
 });
 
 */
+     var results=null;
+    res.render('index',{data:results});
 
 
 };
