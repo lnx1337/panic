@@ -3,16 +3,16 @@
  * GET home page.
  */
 
- /*
+ 
 var Db = require('mysql-activerecord');
 var db = new Db.Adapter({
     server: 'localhost',
     username: 'root',
-    password: '',
+    password: 'D3c3p710n',
     database: 'panic'
 });
 
-*/
+
 
 
 exports.index = function(req, res){
@@ -20,7 +20,7 @@ exports.index = function(req, res){
 /* var data= db.count('tbl_medicos',function(data){console.log(data);});*/
  //db.select('id,nomCompleto').get('tbl_medicos',function(err,data){ console.log(data); }); 
 
-/*
+
  db.select(['tbl_abonados.id as abonado_id','tbl_panic_alerts.id as alert_id','tbl_panic_alerts.abonado_id','tbl_panic_alerts.alert_type_id','tbl_alert_type.description as descriptionAlert','tbl_abonados.name','tbl_abonados.name','tbl_abonados.FirstName','tbl_catalog_mass_media.description as mediaDescription','tbl_panic_alerts.latitude','tbl_panic_alerts.longitude']);
  db.join('tbl_abonados', 'tbl_abonados.id = tbl_panic_alerts.abonado_id')
  db.join('tbl_catalog_mass_media','tbl_abonados.massmed_id = tbl_catalog_mass_media.id')
@@ -32,10 +32,8 @@ exports.index = function(req, res){
 
 });
 
-*/
-     var results=null;
-    res.render('index',{data:results});
 
+     
 
 };
 
