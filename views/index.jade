@@ -68,12 +68,12 @@ block content
 
         
               var socket  = io.connect('http://lnx1337.cloudapp.net');
-                     
-              socket.on('list', function(data) {
-                           alert(data);
-                          //addMarker(JSON.parse(data));     
-                     
-              
+              socket.on('conectado', function(data) {
+                      console.log("conectado"+data);
+              });
+              socket.on('refresh', function(data) {
+                  addMarker(JSON.parse(data));     
+             
               });
           
 

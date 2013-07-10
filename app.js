@@ -70,7 +70,7 @@ io.sockets.on('connection', function(client) {
        //io.broadcast.emit('user connected');
 
       //client.broadcast.emit('list',"que pedo");
-        client.emit('list', { hello: 'world' });
+      client.emit('conectado', { hello: 'hello world node :) lnx1337' });
 
 
 
@@ -88,7 +88,7 @@ app.get('/abonado/:id',routes.abonado);
 app.get('/abonados', user.list);
 app.post('/',function(req,res){
 
-     /*
+     
       var cabonado_id=req.body.abonado_id;
       var calert_type_id=req.body.alert_type_id;
       var clatitude=req.body.latitude;
@@ -112,7 +112,7 @@ app.post('/',function(req,res){
         });
 
       }
-      */
+      
 
 });
 app.post('/login',routes.login);
