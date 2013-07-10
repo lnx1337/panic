@@ -18,29 +18,11 @@ block content
         
           for(i=0;i<tam;i++){
             
-            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [-99.133269,19.43267]},"properties": { "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Cherry_Blossoms_and_Washington_Monument.jpg/320px-Cherry_Blossoms_and_Washington_Monument.jpg","url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": "Washington, D.C."}}; 
+            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [f[i].longitude,f[i].latitude]},"properties": { "image": '"/uploads/'+f[i].name+'.png"' ,"url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": "Washington, D.C."}}; 
            
           }
           alert(geoJson.length);
 
-          /* 
-            //f[i].abonado_id
-            L.mapbox.markerLayer({
-                  type: 'Feature',
-                  geometry: {
-                      type: 'Point',
-                      coordinates: [f[i].longitude,f[i].latitude]
-                  },
-                  properties: {
-                      title: 'A Single Marker',
-                      description: 'Just one of me',
-                      image: "http://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Cherry_Blossoms_and_Washington_Monument.jpg/320px-Cherry_Blossoms_and_Washington_Monument.jpg",
-        "url": "http://en.wikipedia.org/wiki/Washington,_D.C.",
-                      'marker-size': 'small',
-                     
-                  }
-              }).addTo(map);
-          */
 
           map.markerLayer.on('layeradd', function(e) {
                   var marker = e.layer,
