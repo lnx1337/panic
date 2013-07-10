@@ -5,7 +5,8 @@ block content
   div(id="mapdos")
   script
       var map = L.mapbox.map('mapdos', 'lnx1337.map-eu8sxqx2');
-      
+      var mapdos = L.mapbox.map('map', 'lnx1337.map-eu8sxqx2');
+      mapdos.setView([19.43267,-99.133269], 5);
       function addMarker(json){
           var f=json;
           var tam =f.length;
@@ -37,9 +38,21 @@ block content
 
        addMarker(!{JSON.stringify(data)});
        map.setView([19.43267,-99.133269], 5);
-       map.markerLayer.on('click', function(e) {
-           map.panTo(e.layer.getLatLng());
-           map.setView(e.layer.getLatLng(), 16);
+       map.markerLayer.on('click', function(e) {     
+       mapdos.setView(e.layer.getLatLng(), 16);
+                L.mapbox.markerLayer({
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: e.layer.getLatLng()
+                    },
+                    properties: {
+                        title: 'A Single Marker',
+                        description: 'Just one of me',
+                        'marker-size': 'large',
+                        'marker-color': '#f0a'
+                    }
+        }).addTo(mapdos);
 
            $.ajax({
                           type: "GET",
@@ -52,11 +65,6 @@ block content
                   }); 
        });
 
-  script
-       var map = L.mapbox.map('map', 'lnx1337.map-eu8sxqx2');
-       map.setView([19.43267,-99.133269], 5);
-                      
-      
   div(id="content",class="element information")
 
 
