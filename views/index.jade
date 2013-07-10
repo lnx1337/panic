@@ -17,8 +17,8 @@ block content
 
         
           for(i=0;i<tam;i++){
-            
-            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [f[i].longitude,f[i].latitude]},"properties": { "image": "/uploads/"+f[i].name+".png" ,"url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": f[i].descriptionAlert }}; 
+  
+            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [f[i].longitude,f[i].latitude]},"properties": { "description":f[i].mediaDescription ,image": "/uploads/"+f[i].name+".png" ,"url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": f[i].descriptionAlert }}; 
            
           }
           alert(geoJson.length);
@@ -30,7 +30,7 @@ block content
                       
 
                   // Create custom popup content
-                  var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
+                  var popupContent =  '<h1>'+feature.properties.description+'</h1><a target="_blank" class="popup" href="' + feature.properties.url + '">' +
                                           '<img src="' + feature.properties.image + '">' +
                                       '   <h2>' + feature.properties.city + '</h2>' +
                                       '</a>';
