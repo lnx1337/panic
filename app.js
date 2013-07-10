@@ -66,8 +66,9 @@ io.sockets.on('connection', function(client) {
 
    
 
-     io.sockets.broadcast.emit('list',"que pedo");
      */
+          io.sockets.broadcast.emit('list',"que pedo");
+
 
 
 });
