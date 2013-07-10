@@ -1,0 +1,203 @@
+extends layout
+block content
+  h1= title
+  p
+
+   script
+      
+      
+      $(document).ready(function() {
+       
+        var map=null;
+        var photoOverlay= new Array();
+
+      
+        function initialize() {
+
+           var latlng = new google.maps.LatLng("19.440694","-99.174408");
+        
+           var myOptions = {
+           zoom: 5,
+           center: latlng,
+           mapTypeId: google.maps.MapTypeId.ROADMAP
+           };
+
+                var styles = [
+                  {
+                    stylers: [
+                      { hue: "#00ffe6" },
+                      { saturation: -20 }
+                    ]
+                  },{
+                    featureType: "road",
+                    elementType: "geometry",
+                    stylers: [
+                      { lightness: 100 },
+                      { visibility: "simplified" }
+                    ]
+                  },{
+                    featureType: "road",
+                    elementType: "labels",
+                    stylers: [
+                      { visibility: "off" }
+                    ]
+                  }
+                ];
+
+                
+
+                var styledMap = new google.maps.StyledMapType(styles,
+                  {name: "Styled Map"});
+
+                
+                var mapOptions = {
+                  zoom: 11,
+                  center: new google.maps.LatLng(55.6468, 37.581),
+                  mapTypeControlOptions: {
+                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'map_style']
+                  }
+                };
+
+                 map = new google.maps.Map(document.getElementById('map_canvas'),myOptions);
+
+                //Associate the styled map with the MapTypeId and set it to display.
+                map.mapTypes.set('map_style', styledMap);
+                map.setMapTypeId('map_style');
+      
+              //map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+         
+       
+         }
+       
+       
+       
+       
+        
+        function getLocation()
+          {
+                if (navigator.geolocation)
+                  {
+                       navigator.geolocation.watchPosition(setpos);
+                  }
+                   else{x.innerHTML="Geolocation is not supported by this browser.";}
+           }
+           
+           
+        function setpos(position) {
+          var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+         
+          var marker = new google.maps.Marker({
+                position: latlng, 
+                map: map, 
+                title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
+           });
+        
+        }
+              
+       
+        function addMarker(json){
+          
+          var f=json;
+          var tam =f.length;
+          var i=0;
+      
+          for(i=0;i<tam;i++){
+               
+             photoOverlay[i] = new PhotoOverlay(map, new google.maps.LatLng(f[i].latitude, f[i].longitude), "/uploads/"+f[i].name+".png", "hola",f[i].abonado_id,'abonado');
+          
+             
+               google.maps.event.addListener(photoOverlay[i], 'click', function() {
+                 // alert(f[i].mediaDescription+" "+f[i].descriptionAlert);
+                });
+              
+          }
+           
+
+        }
+          /*
+             var socket  = io.connect('http://lnx1337.cloudapp.net/');
+             socket.on('list', function(data) {
+                 if(photoOverlay.length>0){
+                   var i=0;
+
+                     for(i=0;i<=photoOverlay.length;i++){
+                        //   photoOverlay[i].setMap(null);
+                      }
+                  }
+                  addMarker(JSON.parse(data));     
+             
+            });
+
+            socket.on('refresh', function(data) {
+                                  
+                 //if(photoOverlay.length>0){
+                   //var i=0;
+
+                     // for(i=0;i<=photoOverlay.length;i++){
+                        //   photoOverlay[i].setMap(null);
+                     // }
+                 // }
+                  
+                // addMarker(JSON.parse(data));     
+                
+             
+            });
+            */
+
+          /*
+          var socket  = io.connect('http://lnx1337.cloudapp.net/');
+          
+               $('#refre').click(function() {           
+                          socket.emit('refresh');
+                 return false; 
+               });
+
+               */
+          
+          $(".abonado").live('click',function(){
+                
+                  var id=$(this).attr("id");                
+                  $.ajax({
+                          type: "GET",
+                          url: "/abonado/"+id,
+                          data: "",
+                          success: function(datos){
+
+                            var location = new google.maps.LatLng(datos[0].latitude, datos[0].longitude);
+                            map.setCenter(location);
+
+                             $("#map_canvas").width(800).delay(20);
+                             $(".information").width(400).delay(20);
+                             $(".information").height(400).delay(20);
+                             map.setZoom(15);
+                             $("#content").html("<img src=\"/uploads/"+datos[0].name+".png\"  width=\"100\" height=\"100\"><br><br>Nombre:"+ datos[0].name+" "+datos[0].FirstName+"<br><hr width=\"100%\"/>Medio:"+datos[0].mediaDescription+"<br><hr width=\"100%\"/>Tipo Alerta: "+datos[0].descriptionAlert+"<br><hr width=\"100%\"/>Coordenadas: lat:"+datos[0].latitude+" lng:"+datos[0].longitude+"<br><hr width=\"100%\"/>Dispositivo:Iphone 5"+"<br><hr width=\"100%\"/>Carrier:"+"Telcel");
+
+
+    
+                          }
+                  });
+
+                
+
+
+
+
+            });   
+        
+        initialize();
+        addMarker(!{JSON.stringify(data)});
+       });
+       
+    
+   
+   button(id="refre")<i class="icon-group"></i> REFRESH  
+   div(id="map_canvas" , style="width:100%; height:90%",class="element mapa")
+   div(id="content",class="element information")
+
+
+          
+
+
+    
+   
+   
