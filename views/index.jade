@@ -41,19 +41,17 @@ block content
        
        map.markerLayer.on('click', function(e) {     
           
-          console.log(e.layer.getLatLng());
         mapdos.setView(e.layer.getLatLng(), 16);
                 L.mapbox.markerLayer({
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: [ e.layer.getLatLng().lat , e.layer.getLatLng().lng ]
+                        coordinates: [e.layer.getLatLng().lng , e.layer.getLatLng().lat]
                     },
                     properties: {
-                        title: 'A Single Marker',
+                        title: '',
                         description: 'Just one of me',
-                        'marker-size': 'large',
-                        'marker-color': '#f0a'
+                        'marker-size': 'small',
                     }
         }).addTo(mapdos);
 
