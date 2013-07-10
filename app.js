@@ -69,7 +69,10 @@ io.sockets.on('connection', function(client) {
      */
        //io.broadcast.emit('user connected');
 
-      client.broadcast.emit('list',"que pedo");
+      //client.broadcast.emit('list',"que pedo");
+        client.emit('list', { hello: 'world' });
+
+
 
 
 
