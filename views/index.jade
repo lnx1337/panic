@@ -98,6 +98,23 @@ block content
                   addMarker(JSON.parse(data));     
              
               });
+
+             map.markerLayer.on('ready', function(e) {
+                    var markers = [];
+                    this.eachLayer(function(marker) { markers.push(marker); });
+                    cycle(markers);
+             });
+
+            function cycle(markers) {
+                    var i = 0;
+                    function run() {
+                        if (++i > markers.length - 1) i = 0;
+                        map.setView(markers[i].getLatLng(), 12);
+                        markers[i].openPopup();
+                        window.setTimeout(run, 3000);
+                    }
+                    run();
+            }        
           
 
   div(id="content",class="element information")
