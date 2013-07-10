@@ -60,11 +60,11 @@ block content
         }
 
        addMarker(!{JSON.stringify(data)});
-       map.setView([19.43267,-99.133269], 2);
+       map.setView([19.43267,-99.133269], 5);
        
        map.markerLayer.on('click', function(e) {     
           
-       mapdos.setView(e.layer.getLatLng(), 16);
+       mapdos.setView(e.layer.getLatLng(), 5);
                 L.mapbox.markerLayer({
                     type: 'Feature',
                     geometry: {
@@ -74,7 +74,8 @@ block content
                     properties: {
                         title: '',
                         description: 'Ubicación',
-                        'marker-size': 'large',
+                        'marker-size': 'small',
+                        "marker-color":"#CC0033" 
                     }
         }).addTo(mapdos);
 
