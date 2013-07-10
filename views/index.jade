@@ -34,11 +34,13 @@ block content
            
 
         }
-        
+
        addMarker(!{JSON.stringify(data)});
        map.setView([19.43267,-99.133269], 5);
        map.markerLayer.on('click', function(e) {
            map.panTo(e.layer.getLatLng());
+          map.setView(e.layer.getLatLng(), 15);
+
            $.ajax({
                           type: "GET",
                           url: "/abonado/"+e.layer.feature.properties['abonado_id'],
