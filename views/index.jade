@@ -62,9 +62,10 @@ block content
        addMarker(!{JSON.stringify(data)});
        map.setView([19.43267,-99.133269], 5);
        
+       
        map.markerLayer.on('click', function(e) {     
           
-       mapdos.setView(e.layer.getLatLng(), 5);
+       mapdos.setView(e.layer.getLatLng(), 2);
                 L.mapbox.markerLayer({
                     type: 'Feature',
                     geometry: {
