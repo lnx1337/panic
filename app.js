@@ -46,7 +46,7 @@ var server= http.createServer(app).listen(app.get('port'), function(){
 });
 
 
- var io = require('socket.io').listen(80);
+ var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function(client) {
    
@@ -67,7 +67,9 @@ io.sockets.on('connection', function(client) {
    
 
      */
-          io.sockets.broadcast.emit('list',"que pedo");
+       //io.broadcast.emit('user connected');
+
+        client.sockets.broadcast.emit('list',"que pedo");
 
 
 
