@@ -37,7 +37,7 @@ block content
           var geoJson=new Array();
 
           for(i=0;i<tam;i++){
-            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [f[i].longitude,f[i].latitude]},"properties": {  "abonado_id":f[i].abonado_id,"description":f[i].mediaDescription ,"image": "/uploads/"+f[i].name+".png" ,"url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": f[i].descriptionAlert,"marker-color":"Red" }}; 
+            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [f[i].longitude,f[i].latitude]},"properties": {  "abonado_id":f[i].abonado_id,"description":f[i].mediaDescription ,"image": "/uploads/"+f[i].name+".png" ,"url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": f[i].descriptionAlert,"marker-color":"#0099ff" }}; 
           }
 
           map.markerLayer.on('layeradd', function(e) {
