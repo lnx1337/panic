@@ -7,7 +7,9 @@ block content
       var map = L.mapbox.map('map', 'lnx1337.map-eu8sxqx2');
       
       function addMarker(json){
+          alert(json.stringify);
           
+         /*
           var f=json;
           var tam =f.length;
           var i=0;
@@ -21,17 +23,18 @@ block content
              
                
           }
+          */
            
 
         }
 
 
       addMarker(!{JSON.stringify(data)});
+      map.setView([19.43267,-99.133269], 5);
 
-                      
   script
        var map = L.mapbox.map('mapdos', 'lnx1337.map-eu8sxqx2');
-
+       map.setView([19.43267,-99.133269], 5);
                       
       
   div(id="content",class="element information")
