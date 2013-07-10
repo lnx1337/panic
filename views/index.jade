@@ -21,8 +21,7 @@ block content
             geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [-99.133269,19.43267]},"properties": { "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Cherry_Blossoms_and_Washington_Monument.jpg/320px-Cherry_Blossoms_and_Washington_Monument.jpg","url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": "Washington, D.C."}}; 
            
           }
-           alert(geoJson[0].type);
-          
+          alert(geoJson.length);
 
           /* 
             //f[i].abonado_id
@@ -42,6 +41,26 @@ block content
                   }
               }).addTo(map);
           */
+
+          map.markerLayer.on('layeradd', function(e) {
+                  var marker = e.layer,
+                      feature = marker.feature;
+                      
+
+                  // Create custom popup content
+                  var popupContent =  '<a target="_blank" class="popup" href="' + feature.properties.url + '">' +
+                                          '<img src="' + feature.properties.image + '">' +
+                                      '   <h2>' + feature.properties.city + '</h2>' +
+                                      '</a>';
+
+                  // http://leafletjs.com/reference.html#popup
+                  marker.bindPopup(popupContent,{
+                      closeButton: false,
+                      minWidth: 320
+                  });
+          });
+
+          map.markerLayer.setGeoJSON(geoJson);
            
 
         }
