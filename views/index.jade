@@ -38,13 +38,16 @@ block content
 
        addMarker(!{JSON.stringify(data)});
        map.setView([19.43267,-99.133269], 5);
+       
        map.markerLayer.on('click', function(e) {     
-       mapdos.setView(e.layer.getLatLng(), 16);
+          
+          console.log(e.layer.getLatLng());
+        mapdos.setView(e.layer.getLatLng(), 16);
                 L.mapbox.markerLayer({
                     type: 'Feature',
                     geometry: {
                         type: 'Point',
-                        coordinates: e.layer.getLatLng()
+                        coordinates: [ e.layer.getLatLng().lat , e.layer.getLatLng().lng ]
                     },
                     properties: {
                         title: 'A Single Marker',
