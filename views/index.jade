@@ -18,7 +18,7 @@ block content
         
           for(i=0;i<tam;i++){
             
-            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [f[i].longitude,f[i].latitude]},"properties": { "image": '"/uploads/'+f[i].name+'.png"' ,"url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": "Washington, D.C."}}; 
+            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [f[i].longitude,f[i].latitude]},"properties": { "image": "/uploads/"+f[i].name+".png" ,"url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": f[i].descriptionAlert }}; 
            
           }
           alert(geoJson.length);
