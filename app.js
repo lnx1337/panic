@@ -46,11 +46,11 @@ var server= http.createServer(app).listen(app.get('port'), function(){
 });
 
 
-/* var io = require('socket.io').listen(server);
+ var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function(client) {
    
-   
+   /*
 
    client.on('refresh', function() {	
          
@@ -67,11 +67,12 @@ io.sockets.on('connection', function(client) {
    
 
      io.sockets.broadcast.emit('list',"que pedo");
+     */
 
 
 });
 
-*/
+
 
 
 
