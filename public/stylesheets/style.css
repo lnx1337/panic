@@ -1,127 +1,20 @@
-/*
-html, body {
-				height: 100%;
-			}
-
-			body {
-			
-				background-color: #000000;
-
-				
-				margin: 0;
-				font-family: Arial;
-				overflow: hidden;
-			}
-
-			a {
-				color: #ffffff;
-			}
-
-			#info {
-				position: absolute;
-				width: 100%;
-				color: #ffffff;
-				padding: 5px;
-				font-family: Monospace;
-				font-size: 13px;
-				font-weight: bold;
-				text-align: center;
-				z-index: 1;
-			}
-
-			#menu {
-				position: absolute;
-				bottom: 20px;
-				width: 100%;
-				text-align: center;
-			}
-
-			.element {
-				width: 140px;
-				height: 180px;
-				box-shadow: 0px 0px 20px rgba(0,255,255,0.5);
-				border: 1px solid rgba(127,255,255,0.25);
-				cursor: default;
-			}
-
-			.element:hover {
-				box-shadow: 0px 0px 20px rgba(0,255,255,0.75);
-				border: 1px solid rgba(127,255,255,0.75);
-			}
-
-				.element .number {
-					position: absolute;
-					top: 20px;
-					right: 20px;
-					font-size: 20px;
-					color: rgba(127,255,255,0.75);
-				}
-
-				.element .symbol {
-					position: absolute;
-					top: 40px;
-					width: 100%;
-					font-size: 70px;
-					text-align: center;
-					color: rgba(255,255,255,0.75);
-					font-weight: bold;
-
-					-webkit-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
-					-moz-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
-					-o-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
-					-ms-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
-					filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
-				}
-
-				.element .details {
-					position: absolute;
-					top: 125px;
-					width: 100%;
-					font-size: 18px;
-					text-align: center;
-					color: rgba(127,255,255,0.75);
-				}
-
-			button {
-				color: rgba(127,255,255,0.75);
-				background: transparent;
-				outline: 1px solid rgba(127,255,255,0.75);
-				border: 0px;
-				padding: 5px 10px;
-				cursor: pointer;
-			}
-			button:hover {
-				background-color: rgba(0,255,255,0.5);
-			}
-			button:active {
-				color: #000000;
-				background-color: rgba(0,255,255,0.75);
-			}
-.mapa{
-	position: absolute;
-	height: 400;
-	width: 500;
-	left: 10px;
-}
-.information{
-	position: absolute;
-	  background-color: rgba(127,255,255,0.75); 
-	height: 800;
-	width: 600;
-	right: 20px;
-	color: rgba(255,255,255,0.75);
-
-					-webkit-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
-					-moz-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
-					-o-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
-					-ms-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
-					filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
-}
-
-*/
-
- body { margin:0; padding:0;
-           background-color: rgb(7,7,21);
-     }
-    #map { position:absolute; top:0; bottom:0; width:50%; height:100%  }
-    #mapdos { position:absolute; top:50%;  margin-left: 50%;  bottom:0; width:50%; height:50%  }
+body { margin:0; padding:0; background-color: rgb(7,7,21); text-rendering: optimizelegibility; color: #8BA3AF; font-family: 'Fauna One', serif;}
+        #map      { position:fixed; top:0%;   margin-left:0%;  width:66%; height:105% }
+        #encabezado{position:absolute; top:0;   margin-left:66%; width:34%; height: 10%; background-color: rgb(7,7,21);}
+        #seccion1 { position:absolute; top:10%; margin-left:66%; width:17%; height: 40%; background-color: rgb(7,7,21); }
+        #seccion2 { position:absolute; top:10%; margin-left:83%; width:17%; height: 40%; background-color: rgb(7,7,21); padding-bottom: 3px;}
+        #mapdos   { position:fixed; top:50%; margin-left:66%; width:34%; bottom: -5%; margin-top: 6px;}
+        .area_media {width:100%; height:50%; margin-right:3px; margin-left: 3px; }
+        .area_media:nth-child(1) { background-color:rgb(19,25,36); margin-bottom: 3px;}
+        .area_media:nth-child(2) { background-color:rgb(19,25,36); margin-bottom:3px;}
+        #area_entera {width:100%; height:100%; margin-left: 3px; background-color:rgb(19,25,36); padding-bottom:3px;}
+        h3 {font-family: 'Offside', cursive; margin-top:1.5%; margin-left:1.5%;}
+        #menu{background-color: black; opacity:0.8;  width:66%; height:10%; bottom:0; position: fixed;}
+        .boton{ background-color:rgb(7,7,21); width:19.5%; height:100%; display:inline-block; margin-right:0px; margin-left:0px; color:#CEE9EA;}
+        .nombre{ display:inline-block; font-size:0.9em;}
+        .foto{ height:27%; display:inline-block;}
+        #coordenadas{ opacity:0.8; position: fixed; background-color:rgb(7,7,21); width:20%; height:5%; display:inline-block; margin-left:40%; top:3%; font-size: 1.5em;}
+        #coordenadas2{ background-color:rgb(7,7,21); margin-bottom:0%; position:absolute;}
+        .boton img { height:80%; margin-left:30%; margin-top:5%;}
+        .popup { text-align: center; }
+        .popup img { width: 100%; }

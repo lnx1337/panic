@@ -1,8 +1,32 @@
 extends layout
 block content
+  #map  
+  #encabezado
+      h3 NOOSBIT RESEARCH NETWORKS
+  #seccion1
+     .area_media
+        .usuarios
+          img.foto(src='kike.png', alt='foto_perfil')
+          .nombre Alejandro León Vega
+          #coordenadas2 20.385825,-99.404297
+     .area_media  
+   
+  #seccion2
+      #area_entera  
+  #mapdos  
+  #menu
+      .boton
+        img(src='uno.png', alt='')
+      .boton
+        img(src='dos.png', alt='')
+      .boton
+        img(src='tres.png', alt='')
+      .boton
+        img(src='cuatro.png', alt='')
+      .boton
+        img(src='cinco.png', alt='')
+  #coordenadas 20.385825,-99.404297
 
-  div(id="map")
-  div(id="mapdos")
   script
       var map = L.mapbox.map('mapdos', 'lnx1337.map-eu8sxqx2');
       var mapdos = L.mapbox.map('map', 'lnx1337.map-eu8sxqx2');
