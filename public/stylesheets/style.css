@@ -1,5 +1,6 @@
-body { margin:0; padding:0; background-color: rgb(7,7,21); text-rendering: optimizelegibility; color: #8BA3AF;
-.@font-face { src: url('http://static.tumblr.com/yn7vk7p/Ifrm4xvf7/spirit.ttf'); font-family: "spirit"; } 
+@font-face {font-family: "spirit"; src: url('http://static.tumblr.com/yn7vk7p/Ifrm4xvf7/spirit.ttf');} 
+
+body { margin:0; padding:0; background-color: rgb(7,7,21); text-rendering: optimizelegibility; color: #8BA3AF;font-family: "spirit";
 }
         #map      { position:fixed; top:0%;   margin-left:0%;  width:66%; height:105% }
         #encabezado{position:absolute; top:0;   margin-left:66%; width:34%; height: 10%; background-color: rgb(7,7,21);}
