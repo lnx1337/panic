@@ -9,20 +9,34 @@ block content
       function addMarker(json){
           alert(json.stringify);
           
-         /*
+
           var f=json;
           var tam =f.length;
           var i=0;
+
+
       
           for(i=0;i<tam;i++){
             
-            alert(f[i].latitude +f[i].longitude);
+           
+              L.mapbox.markerLayer({
+                  type: 'Feature',
+                  geometry: {
+                      type: 'Point',
+                      coordinates: [f[i].longitude,f[i].latitude]
+                  },
+                  properties: {
+                      title: 'A Single Marker',
+                      description: 'Just one of me',
+                      'marker-size': 'large',
+                     
+                  }
+              }).addTo(map);
+            }
 
+          /* alert(f[i].latitude +);
             //"/uploads/"+f[i].name+".png"
             //f[i].abonado_id
-             
-               
-          }
           */
            
 
