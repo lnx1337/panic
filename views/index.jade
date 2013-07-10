@@ -13,13 +13,25 @@ block content
           var f=json;
           var tam =f.length;
           var i=0;
+          var geoJson=new Array();
 
-
-      
+        
           for(i=0;i<tam;i++){
             
+            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [-99.133269,19.43267]},
+                            "properties": { "image": "http://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Cherry_Blossoms_and_Washington_Monument.jpg/320px-Cherry_Blossoms_and_Washington_Monument.jpg",
+                            "url": "http://en.wikipedia.org/wiki/Washington,_D.C.",
+                            "marker-symbol": "star",
+                            "city": "Washington, D.C."
+                        }; 
            
-              L.mapbox.markerLayer({
+          }
+           alert(geoJson[0].type);
+          
+
+          /* 
+            //f[i].abonado_id
+            L.mapbox.markerLayer({
                   type: 'Feature',
                   geometry: {
                       type: 'Point',
@@ -34,11 +46,6 @@ block content
                      
                   }
               }).addTo(map);
-            }
-
-          /* alert(f[i].latitude +);
-            //
-            //f[i].abonado_id
           */
            
 
