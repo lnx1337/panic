@@ -46,12 +46,12 @@ var server= http.createServer(app).listen(app.get('port'), function(){
 });
 
 
-var io = require('socket.io').listen(server);
+/* var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function(client) {
    
    
-  /*
+
    client.on('refresh', function() {	
          
      db.select(['tbl_abonados.id as abonado_id','tbl_panic_alerts.id as alert_id','tbl_panic_alerts.abonado_id','tbl_panic_alerts.alert_type_id','tbl_alert_type.description as descriptionAlert','tbl_abonados.name','tbl_abonados.name','tbl_abonados.FirstName','tbl_catalog_mass_media.description as mediaDescription','tbl_panic_alerts.latitude','tbl_panic_alerts.longitude']);
@@ -64,13 +64,14 @@ io.sockets.on('connection', function(client) {
 
   });
 
-   */
+   
 
      io.sockets.broadcast.emit('list',"que pedo");
 
 
 });
 
+*/
 
 
 
