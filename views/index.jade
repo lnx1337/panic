@@ -146,7 +146,37 @@ block content
                 );
 
 
-             });        
+             });
+
+             function codeLatLng() {
+                  var input = "19.432679,-99.133236";
+                  var latlngStr = input.split(",",2);
+                  var lat = parseFloat(latlngStr[0]);
+                  var lng = parseFloat(latlngStr[1]);
+                  var latlng = new google.maps.LatLng(lat, lng);
+                  geocoder.geocode({'latLng': latlng}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                      if (results[1]) {
+                      /*
+                        map.setZoom(11);
+                        marker = new google.maps.Marker({
+                            position: latlng,
+                            map: map
+                        });
+                        */
+                        alert(results[1].formatted_address);
+
+                         //infowindow.setContent(results[1].formatted_address);
+                        //infowindow.open(map, marker);
+                      }
+                    } else {
+                      alert("Geocoder failed due to: " + status);
+                    }
+                  });
+             }
+
+
+
           
 
   div(id="content",class="element information")
