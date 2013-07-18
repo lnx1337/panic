@@ -15,7 +15,7 @@ block content
   #mapdos  
   #menu
       .boton
-        img(src='/images/uno.png', alt='')
+        img(src='/images/uno.png', alt='' id="reset")
       .boton
         img(src='/images/dos.png', alt='')
       .boton
@@ -135,7 +135,13 @@ block content
                     }
                     run();
             }  
-            */      
+            */
+           $("#reset").click(function(){
+            alert("..");
+              mapdos.markerLayer.clearLayers();
+              mapdos.zoom(10, true);
+
+           });        
           
 
   div(id="content",class="element information")
