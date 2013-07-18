@@ -86,7 +86,7 @@ block content
                           data: "",
                           success: function(datos){
                             codeLatLng(datos[0].latitude+","+datos[0].longitude);
-                            $(".usuarios").html("<img src=\"/uploads/"+datos[0].name+".png\"  class=\"foto\" ><div class=\"nombre\" > Nombre:"+ datos[0].name+" "+datos[0].FirstName+"</div><hr width=\"100%\"/>Medio:"+datos[0].mediaDescription+"<br><hr width=\"100%\"/>Tipo Alerta: "+datos[0].descriptionAlert+"<br><hr width=\"100%\"/>Coordenadas: lat:"+datos[0].latitude+" lng:"+datos[0].longitude+"<br><div id='direccion'></div><hr width=\"100%\"/>Dispositivo:Iphone 5"+"<br><hr width=\"100%\"/>Carrier:"+"Telcel");
+                            $(".usuarios").html("<img src=\"/uploads/"+datos[0].name+".png\"  class=\"foto\" ><div class=\"nombre\" > Nombre:"+ datos[0].name+" "+datos[0].FirstName+"</div>Medio:"+datos[0].mediaDescription+"<br>Tipo Alerta: "+datos[0].descriptionAlert+"<br>Coordenadas: lat:"+datos[0].latitude+" lng:"+datos[0].longitude+"<br>Dirección:<div id='direccion'></div><br>Dispositivo:Iphone 5"+"<br>Carrier:"+"Telcel");
     
                           }
                   }); 
