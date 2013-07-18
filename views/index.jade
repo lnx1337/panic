@@ -106,47 +106,10 @@ block content
                     this.eachLayer(function(marker) { markers.push(marker); });
                     cycle(markers);
              });
-                
 
-            
-          /*
-            function cycle(markers) {
-                    var i = 0;
-                    function run() {
-                        if (++i > markers.length - 1) i = 0;
-                        map.setView(markers[i].getLatLng(), 12);
-                       
 
-                        mapdos.setView(markers[i].getLatLng(), 12);
-                        L.mapbox.markerLayer({
-                              type: 'Feature',
-                              geometry: {
-                                  type: 'Point',
-                                  coordinates: [markers[i].getLatLng().lng , markers[i].getLatLng().lat]
-                              },
-                              properties: {
-                                  title: '',
-                                  description: 'Ubicación',
-                                  'marker-size': 'large',
-                              }
-                       }).addTo(mapdos);
-
-                      markers[i].openPopup();
-                      window.setTimeout(run, 5000);
-                    }
-                    run();
-            }  
-            */
-          
+        
                   
           
 
   div(id="content",class="element information")
-
-
-          
-
-
-    
-   
-   
