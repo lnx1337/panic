@@ -140,7 +140,7 @@ block content
              $('#reset').click(function(){
                alert("..");
                 mapdos.markerLayer.clearLayers();
-                 mapdos.zoom(10, true);
+               mapdos.centerzoom({ lat: 38.9, lon: -77.03 }, 5);
 
              });        
           
