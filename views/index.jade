@@ -25,7 +25,7 @@ block content
         img(src='/images/cuatro.png', alt='')
       .boton
         img(src='/images/cinco.png', alt='')
-  #coordenadas 20.385825,-99.404297
+  #coordenadas 
 
   script
       var map = L.mapbox.map('mapdos', 'lnx1337.map-eu8sxqx2');
@@ -88,7 +88,7 @@ block content
                           success: function(datos){
                             codeLatLng(datos[0].latitude+","+datos[0].longitude);
                             $(".usuarios").html("<img src=\"/uploads/"+datos[0].name+".png\"  class=\"foto\" ><div class=\"nombre\" > Nombre:"+ datos[0].name+" "+datos[0].FirstName+"</div>Medio:"+datos[0].mediaDescription+"<br>Tipo Alerta: "+datos[0].descriptionAlert+"<br>Coordenadas: lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude)+"<br>Dirección:<div id='direccion'></div><br>Dispositivo:Iphone 5"+"<br>Carrier:"+"Telcel");
-    
+                            $("#coordenadas").html("<br>Coordenadas: lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude));
                           }
                   }); 
        });
