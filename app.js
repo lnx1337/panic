@@ -107,7 +107,7 @@ console.log(req.files);
 
       fs.readFile(req.files.displayImage.path, function (err, data) {
       var picture=getName();
-      var newPath =__dirname+"/../public/uploads/"+picture;
+      var newPath =__dirname+"/public/uploads/"+picture;
 
       fs.writeFile(newPath, data, function (err) {
              if(err){
