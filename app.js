@@ -95,12 +95,21 @@ app.get('/form',routes.form);
 app.get('/', routes.index);
 app.get('/abonado/:id',routes.abonado);
 app.get('/abonados', user.list);
+
+
+
 app.post('/',function(req,res){
 
 
 
 console.log(req.files);
 
+
+
+  var cabonado_id=req.body.abonado_id;
+  var calert_type_id=req.body.alert_type_id;
+  var clatitude=req.body.latitude;
+  var clongitude=req.body.longitude;
 
 
    if(req.files!=null){
@@ -131,7 +140,43 @@ console.log(req.files);
              req.body.picture=picture;      
              console.log(req.body);
 
+
+
+
+            if( cabonado_id !=" "  && calert_type_id !=" " && clatitude !=" " && clongitude !=" " ){
+                  
+                    db.insert('tbl_panic_alerts', { abonado_id: cabonado_id , alert_type_id: calert_type_id ,latitude:clatitude ,longitude:clongitude }, function(err, alert){              
+                        db.insert('tbl_tracking_gps', { alert_id: alert.insertId, abonado_id: cabonado_id , alert_type_id: calert_type_id, latitude:clatitude, longitude:clongitude, dat_time:getDateTime() }, function(err, info){ 
+
+                             
+                              
+
+
+                              db.insert('tbl_fotos', { url: alert.insertId, longitud: cabonado_id , latitud: calert_type_id }, function(err,foto){
+
+                                       db.insert(' tbl_fotos_has_tbl_panic_alerts', { tbl_fotos_id:foto.insertId, alert_id:alert.insertId,abonado_id:cabonado_id}, function(err,foto){
+
                     
+                                                    db.select(['tbl_abonados.id as abonado_id','tbl_panic_alerts.id as alert_id','tbl_panic_alerts.abonado_id','tbl_panic_alerts.alert_type_id','tbl_alert_type.description as descriptionAlert','tbl_abonados.name','tbl_abonados.name','tbl_abonados.FirstName','tbl_catalog_mass_media.description as mediaDescription','tbl_panic_alerts.latitude','tbl_panic_alerts.longitude']);
+                                                    db.join('tbl_abonados', 'tbl_abonados.id = tbl_panic_alerts.abonado_id')
+                                                    db.join('tbl_catalog_mass_media','tbl_abonados.massmed_id = tbl_catalog_mass_media.id')
+                                                    db.join('tbl_alert_type','tbl_panic_alerts.alert_type_id=tbl_alert_type.id')
+                                                     .get('tbl_panic_alerts', function(err, results, fields) {
+                                                          // io.sockets.broadcast.emit('list',JSON.stringify(results));
+                                                           io.sockets.emit('refresh',JSON.stringify(results));
+
+                                                     });
+                                                     
+                                                     res.send('{ alert_id:"'+alert.insertId+'",abonado_id:"'+cabonado_id+'",alert_type_id:"'+calert_type_id+'"}');  
+                                                       
+                                             });
+                              });
+                        });
+                    });
+
+                  }
+
+                                  
            }
      });
 
@@ -140,38 +185,7 @@ console.log(req.files);
 }
 
 
-
-
-
-//Correcto
-
-
-     /*
-      var cabonado_id=req.body.abonado_id;
-      var calert_type_id=req.body.alert_type_id;
-      var clatitude=req.body.latitude;
-      var clongitude=req.body.longitude;
-      if( cabonado_id !=" "  && calert_type_id !=" " && clatitude !=" " && clongitude !=" " ){
-        db.insert('tbl_panic_alerts', { abonado_id: cabonado_id , alert_type_id: calert_type_id ,latitude:clatitude ,longitude:clongitude }, function(err, alert){              
-            db.insert('tbl_tracking_gps', { alert_id: alert.insertId, abonado_id: cabonado_id , alert_type_id: calert_type_id, latitude:clatitude, longitude:clongitude, dat_time:getDateTime() }, function(err, info){ 
-
-                      db.select(['tbl_abonados.id as abonado_id','tbl_panic_alerts.id as alert_id','tbl_panic_alerts.abonado_id','tbl_panic_alerts.alert_type_id','tbl_alert_type.description as descriptionAlert','tbl_abonados.name','tbl_abonados.name','tbl_abonados.FirstName','tbl_catalog_mass_media.description as mediaDescription','tbl_panic_alerts.latitude','tbl_panic_alerts.longitude']);
-			          db.join('tbl_abonados', 'tbl_abonados.id = tbl_panic_alerts.abonado_id')
-			          db.join('tbl_catalog_mass_media','tbl_abonados.massmed_id = tbl_catalog_mass_media.id')
-			          db.join('tbl_alert_type','tbl_panic_alerts.alert_type_id=tbl_alert_type.id')
-			           .get('tbl_panic_alerts', function(err, results, fields) {
-			                // io.sockets.broadcast.emit('list',JSON.stringify(results));
-			                 io.sockets.emit('refresh',JSON.stringify(results));
-
-			           });
-                 
-                 res.send('{ alert_id:"'+alert.insertId+'",abonado_id:"'+cabonado_id+'",alert_type_id:"'+calert_type_id+'"}');  
-            });
-        });
-
-      }
-      
-      */
+    
 
 });
 app.post('/login',routes.login);
