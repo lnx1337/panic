@@ -149,3 +149,43 @@ function getDateTime() {
     return year + "-" + month + "-" + day + " " + hour + ":" + min + ":" + sec;
 
 }
+
+
+
+function decimalCoorsLat(arrayLat){
+    
+    var arreglo=arrayLat;
+    var Grados= arreglo[0];
+    var Minutos=arreglo[2];
+    var Segundos=arreglo[3];
+    var direccion=arreglo[4];
+
+    Minutos=Minutos.split("'");
+    Segundos=Segundos.split('"');
+    latitude_sign = (direccion == "N") ? 1 : -1;
+    latitude  = (parseFloat(Grados)  + ( parseFloat(Minutos[0]) / 60.0)  + ( parseFloat(Segundos[0]) / 60.0 / 60.0))  * latitude_sign;
+
+    return latitude;
+}
+
+
+function decimalCoorsLong(arrayLong){
+    
+    var arreglo=arrayLong;
+    var Grados= arreglo[0];
+    var Minutos=arreglo[2];
+    var Segundos=arreglo[3];
+    var direccion=arreglo[4];
+      
+    Minutos=Minutos.split("'");
+    Segundos=Segundos.split('"');
+
+    longitude_sign = (direccion == "E") ? 1 : -1;
+    longitude = ( parseFloat(Grados) +  ( parseFloat(Minutos) / 60.0) + ( parseFloat(Segundos) / 60.0 / 60.0)) * longitude_sign;
+
+    return longitude;
+}
+
+function getName(){
+  return new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').replace('-','').replace(':','').replace(' ','').replace('-','').replace(':','')+".jpg"; 
+}
