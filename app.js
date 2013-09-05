@@ -9,6 +9,15 @@ var express = require('express')
   , http = require('http')
   , path = require('path');
 
+
+
+var multipart = require('multipart');
+var sys = require('sys'); 
+var fs= require('fs');
+var exec = require('child_process').exec;
+
+
+
 var app = express();
 
 // all environments

@@ -12,9 +12,6 @@ var db = new Db.Adapter({
     database: 'panic'
 });
 
-var fs= require('fs');
-
-
 
 
 
