@@ -38,6 +38,15 @@ exports.index = function(req, res){
 };
 
 
+
+
+
+exports.form=function(req,res){
+
+   res.send('form',{});
+}
+
+
 exports.abonado=function(req,res){
 
   
@@ -86,15 +95,19 @@ exports.login=function(req,res){
 
 exports.alertPanic = function (req,res){
       
-
       var cabonado_id=req.body.abonado_id;
       var calert_type_id=req.body.alert_type_id;
       var clatitude=req.body.latitude;
       var clongitude=req.body.longitude;
+
+
       if( cabonado_id !=" "  && calert_type_id !=" " && clatitude !=" " && clongitude !=" " ){
+       
         db.insert('tbl_panic_alerts', { abonado_id: cabonado_id , alert_type_id: calert_type_id ,latitude:clatitude ,longitude:clongitude }, function(err, alert){              
             db.insert('tbl_tracking_gps', { alert_id: alert.insertId, abonado_id: cabonado_id , alert_type_id: calert_type_id, latitude:clatitude, longitude:clongitude, dat_time:getDateTime() }, function(err, info){ 
                  res.send('{ alert_id:"'+alert.insertId+'",abonado_id:"'+cabonado_id+'",alert_type_id:"'+calert_type_id+'"}');  
+
+
             });
         });
 

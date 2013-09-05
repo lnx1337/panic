@@ -1,0 +1,39 @@
+extends layout
+block content
+  h1= title
+  p Welcome to #{title}
+  
+
+       
+   form(id="formw" , method="POST",enctype="multipart/form-data",action="/")
+        div
+          span Nombre :
+          input( type="text", name="name", id="addCommentPerson")
+        div
+          span Year :
+          input( type="text", name="year", id="addCommentPerson")
+        div
+          span Grapes :
+          input( type="text", name="grapes", id="addCommentPerson")
+        div
+          span Country :
+          input( type="text", name="country", id="addCommentPerson")
+        div
+          span Region :
+          input( type="text", name="region", id="addCommentPerson")    
+        div
+          span Description :
+          textarea( name="description", rows=5, id="addCommentComment")
+        
+        div
+          span Picture :
+          input( type="text", name="picture", id="addCommentPerson")
+          input(type="file", name="displayImage", id="addCommentPerson")  
+        
+        div#editArticleSubmit
+          input(type="submit",id="save" ,value="Send")
+          
+
+   
+    
+      

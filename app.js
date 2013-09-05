@@ -82,13 +82,62 @@ io.sockets.on('connection', function(client) {
 
 
 
-
+app.get('/form',routes.form);
 app.get('/', routes.index);
 app.get('/abonado/:id',routes.abonado);
 app.get('/abonados', user.list);
 app.post('/',function(req,res){
 
-     
+
+
+console.log(req.files);
+
+
+
+   if(req.files!=null){
+
+      fs.readFile(req.files.displayImage.path, function (err, data) {
+      var picture=getName();
+      var newPath =__dirname+"/../public/uploads/"+picture;
+
+      fs.writeFile(newPath, data, function (err) {
+             if(err){
+              console.log(err);
+             }
+       });
+
+   
+     var cmd="exiftool -j "+newPath; 
+     var child = exec(cmd, function (error, stdout, stderr) {
+       
+          var result = '{"stdout":' + stdout + ',"stderr":"' + stderr + '","cmd":"' + cmd + '"}';    
+          var json=JSON.parse(stdout);
+          
+            if(json[0].GPSLatitude!=null &&json[0].GPSLongitude){
+
+             var Latitude=json[0].GPSLatitude.split(' ');
+             var Longitude=json[0].GPSLongitude.split(' ');
+             req.body.longitude=decimalCoorsLong(Longitude);
+             req.body.latitude=decimalCoorsLat(Latitude);
+             req.body.picture=picture;      
+             console.log(req.body);
+
+                    
+           }
+     });
+
+ });
+
+}
+
+
+
+
+
+//Correcto
+
+
+     /*
       var cabonado_id=req.body.abonado_id;
       var calert_type_id=req.body.alert_type_id;
       var clatitude=req.body.latitude;
@@ -113,6 +162,7 @@ app.post('/',function(req,res){
 
       }
       
+      */
 
 });
 app.post('/login',routes.login);
