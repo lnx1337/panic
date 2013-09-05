@@ -43,7 +43,7 @@ exports.index = function(req, res){
 
 exports.form=function(req,res){
 
-   res.send('form',{});
+   res.render('form',{data:''});
 }
 
 
