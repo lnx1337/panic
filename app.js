@@ -145,9 +145,14 @@ console.log(req.files);
 
              var Latitude=json[0].GPSLatitude.split(' ');
              var Longitude=json[0].GPSLongitude.split(' ');
-             req.body.longitude=decimalCoorsLong(Longitude);
-             req.body.latitude=decimalCoorsLat(Latitude);
+
+             var longitudeDecimal=decimalCoorsLong(Longitude);
+             var latitudeDecimal=decimalCoorsLat(Latitude);
+
+             req.body.longitude=longitudeDecimal;
+             req.body.latitude=latitudeDecimal;
              req.body.picture=picture;      
+             
              console.log(req.body);
 
 
@@ -162,7 +167,7 @@ console.log(req.files);
                               
 
 
-                              db.insert('tbl_fotos', { url: alert.insertId, longitud: cabonado_id , latitud: calert_type_id }, function(err,foto){
+                              db.insert('tbl_fotos', { url: picture , longitud: longitudeDecimal , latitud: latitudeDecimal }, function(err,foto){
 
                                        db.insert(' tbl_fotos_has_tbl_panic_alerts', { tbl_fotos_id:foto.insertId, alert_id:alert.insertId,abonado_id:cabonado_id}, function(err,foto){
 
@@ -173,11 +178,15 @@ console.log(req.files);
                                                     db.join('tbl_alert_type','tbl_panic_alerts.alert_type_id=tbl_alert_type.id')
                                                      .get('tbl_panic_alerts', function(err, results, fields) {
                                                           // io.sockets.broadcast.emit('list',JSON.stringify(results));
+                                                           
+                                                           //console.log(results);
                                                            io.sockets.emit('refresh',JSON.stringify(results));
+
+
 
                                                      });
                                                      
-                                                     res.send('{ alert_id:"'+alert.insertId+'",abonado_id:"'+cabonado_id+'",alert_type_id:"'+calert_type_id+'"}');  
+                                                     //res.send('{ alert_id:"'+alert.insertId+'",abonado_id:"'+cabonado_id+'",alert_type_id:"'+calert_type_id+'"}');  
                                                        
                                              });
                               });
