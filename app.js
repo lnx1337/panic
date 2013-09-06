@@ -17,6 +17,16 @@ var fs= require('fs');
 var exec = require('child_process').exec;
 
 
+var Db = require('mysql-activerecord');
+var db = new Db.Adapter({
+    server: 'localhost',
+    username: 'root',
+    password: 'D3c3p710n',
+    database: 'panic'
+});
+
+
+
 
 var app = express();
 
