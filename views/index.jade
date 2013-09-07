@@ -37,7 +37,7 @@ block content
           var geoJson=new Array();
 
           for(i=0;i<tam;i++){
-            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [f[i].longitude,f[i].latitude]},"properties": {  "abonado_id":f[i].abonado_id,"description":f[i].mediaDescription ,"image": "/uploads/"+f[i].name+".png" ,"url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": f[i].descriptionAlert,"marker-color":"#CC0033" }}; 
+            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [f[i].longitude,f[i].latitude]},"properties": {  "alert_id":f[i].alert_id,"description":f[i].mediaDescription ,"image": "/uploads/"+f[i].name+".png" ,"url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": f[i].descriptionAlert,"marker-color":"#CC0033" }}; 
           }
 
           map.markerLayer.on('layeradd', function(e) {
@@ -82,7 +82,7 @@ block content
 
            $.ajax({
                           type: "GET",
-                          url: "/abonado/"+e.layer.feature.properties['abonado_id'],
+                          url: "/alert/"+e.layer.feature.properties['alert_id'],
                           data: "",
                           success: function(datos){
                             codeLatLng(datos[0].latitude+","+datos[0].longitude);

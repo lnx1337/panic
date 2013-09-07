@@ -103,7 +103,7 @@ io.sockets.on('connection', function(client) {
 
 app.get('/form',routes.form);
 app.get('/', routes.index);
-app.get('/abonado/:id',routes.abonado);
+app.get('/alert/:id',routes.alert);
 app.get('/abonados', user.list);
 
 
