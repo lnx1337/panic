@@ -170,7 +170,10 @@ console.log(req.files);
                               db.insert('tbl_fotos', { url: picture ,latitud: latitudeDecimal, longitud: longitudeDecimal }, function(err,foto){
  
 
-                                      
+                                     console.log(err);
+                                     console.log(foto);
+
+                                      /*
                                   
                                        db.insert(' tbl_fotos_has_tbl_panic_alerts', { tbl_fotos_id:foto.insertId, alert_id:alert.insertId,abonado_id:cabonado_id}, function(err,foto){
 
@@ -190,6 +193,8 @@ console.log(req.files);
                                                      });
                                                                                                      
                                              });
+
+                               */
                                    
 
    
