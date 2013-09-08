@@ -169,7 +169,7 @@ console.log(req.files);
 
                               db.insert('tbl_fotos', { url: picture , longitud: longitudeDecimal , latitud: latitudeDecimal }, function(err,foto){
 
-                                       db.insert(' tbl_fotos_has_tbl_panic_alerts', { tbl_fotos_id:foto.insertId, alert_id:alert.insertId,abonado_id:cabonado_id}, function(err,foto){
+                                       db.insert(' tbl_fotos_has_tbl_panic_alerts', { tbl_fotos_id:foto.insertId, alert_id:5,abonado_id:cabonado_id}, function(err,foto){
 
                     
                                                     db.select(['tbl_abonados.id as abonado_id','tbl_panic_alerts.id as alert_id','tbl_panic_alerts.abonado_id','tbl_panic_alerts.alert_type_id','tbl_alert_type.description as descriptionAlert','tbl_abonados.name','tbl_abonados.name','tbl_abonados.FirstName','tbl_catalog_mass_media.description as mediaDescription','tbl_panic_alerts.latitude','tbl_panic_alerts.longitude']);
