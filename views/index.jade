@@ -113,8 +113,14 @@ block content
                           url: "/changeStatus",
                           data: "id="+id,
                           success: function(datos){
-                            alert("Atendido");
-                            return false;
+                              $("#area_entera").html("");
+                              $("#usuarios").html("");
+                               mapdos.setView([19.432679,-99.133236], 5);
+                               mapdos.markerLayer.eachLayer(  
+                                 function(l) { mapdos.markerLayer.removeLayer(l); }
+                               );
+
+                              return false;
                           }
                   }); 
 
