@@ -110,7 +110,7 @@ app.get('/abonados', user.list);
 
 
 
-app.post('/changueStatus',function(req,res){
+app.post('/changeStatus',function(req,res){
     var newData = { status:req.body.status };
     db.where({ id:req.body.id });
     db.update('tbl_panic_alerts', newData, function(err) {
