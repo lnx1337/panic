@@ -7,7 +7,8 @@ block content
      .area_media
         .usuarios
           .nombre 
-          #coordenadas2 
+          #coordenadas2
+        #status   
      .area_media  
    
   #seccion2
@@ -90,6 +91,7 @@ block content
                             $("#coordenadas").html("");
                             $(".usuarios").html("<img src=\"/uploads/"+datos[0].name+".png\"  class=\"foto\" ><div class=\"nombre\" > Nombre:"+ datos[0].name+" "+datos[0].FirstName+"</div>Medio:"+datos[0].mediaDescription+"<br>Tipo Alerta: "+datos[0].descriptionAlert+"<br>Coordenadas: lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude)+"<br>Dirección:<div id='direccion'></div><br>Dispositivo:Iphone 5"+"<br>Carrier:"+"Telcel");
                             $("#coordenadas").html("lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude));
+                            $("#status").html("status");
                              var fotos="<h5>Imágenes Alerta</h5>";
                              var fcount=datos[0].fotos.length;
                              for(i=0;i<fcount;i++){
