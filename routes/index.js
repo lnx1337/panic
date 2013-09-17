@@ -48,7 +48,7 @@ exports.form=function(req,res){
 
 
 exports.alert=function(req,res){
-
+var response=null;
   
  db.select(['tbl_abonados.id as abonado_id','tbl_panic_alerts.id as alert_id','tbl_panic_alerts.abonado_id','tbl_panic_alerts.alert_type_id','tbl_alert_type.description as descriptionAlert','tbl_abonados.name','tbl_abonados.FirstName','tbl_catalog_mass_media.description as mediaDescription','tbl_panic_alerts.latitude','tbl_panic_alerts.longitude']);
  db.join('tbl_abonados', 'tbl_abonados.id = tbl_panic_alerts.abonado_id')
@@ -63,9 +63,11 @@ exports.alert=function(req,res){
    db.join('tbl_fotos_has_tbl_panic_alerts','tbl_fotos_has_tbl_panic_alerts.tbl_fotos_id=tbl_fotos.id')
    db.where('tbl_fotos_has_tbl_panic_alerts.tbl_panic_alerts_id='+req.params.id).get('tbl_fotos',function(err,fotos,fields){
      results.fotos=fotos;
+
+     response=results;
      
 
-     res.send(results);
+     res.send(response);
 
    }); 
 
