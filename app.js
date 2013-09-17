@@ -108,12 +108,24 @@ app.get('/abonados', user.list);
 
 
 
+
+app.post('/changueStatus',function(req,res){
+    var newData = { status:req.body.status };
+    db.where({ id:req.body.id });
+    db.update('tbl_panic_alerts', newData, function(err) {
+            if (!err) {
+                console.log('Updated!');
+            }
+        });
+});
+
+
+
+
+
+
+
 app.post('/',function(req,res){
-
-
-
-console.log(req.files);
-
 
 
   var cabonado_id=req.body.abonado_id;
@@ -187,7 +199,6 @@ console.log(req.files);
                                                     db.join('tbl_alert_type','tbl_panic_alerts.alert_type_id=tbl_alert_type.id')
                                                      .get('tbl_panic_alerts', function(err, results, fields) {
                                                           // io.sockets.broadcast.emit('list',JSON.stringify(results));
-                                                           
                                                            //console.log(results);
                                                            io.sockets.emit('refresh',JSON.stringify(results));
 
@@ -219,6 +230,11 @@ console.log(req.files);
     
 
 });
+
+
+
+
+
 app.post('/login',routes.login);
 app.post('/trakingGPS',routes.trakingGPS);
 
