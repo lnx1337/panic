@@ -94,7 +94,8 @@ block content
                              var fcount=datos[0].fotos.length;
 
                              for(i=0;i<=fcount;i++){
-                              fotos += '<img src="/uploads/'+datos[0].fotos[i].url+  '" width="100" heigth="200" />';
+                              console.log(datos[0].fotos[i]);
+                              //fotos += '<img src="/uploads/'+datos[0].fotos[i].url+  '" width="100" heigth="200" />';
                              }
 
                               $("#area_entera").html(fotos);
