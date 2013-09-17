@@ -215,8 +215,12 @@ app.post('/',function(req,res){
                                                      .get('tbl_panic_alerts', function(err, results, fields) {
                                                           // io.sockets.broadcast.emit('list',JSON.stringify(results));
                                                            //console.log(results);
+                                                           
                                                            io.sockets.emit('refresh',JSON.stringify(results));
 
+                                                           res.send({"response":"ok"});
+
+  
 
 
                                                      });
