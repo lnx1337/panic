@@ -109,7 +109,7 @@ block content
         var id= $(this).attr('id');
          
          $.ajax({
-                          type: "GET",
+                          type: "POST",
                           url: "/changeStatus",
                           data: "id="+id,
                           success: function(datos){
