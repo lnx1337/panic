@@ -114,7 +114,7 @@ block content
                           data: "id="+id,
                           success: function(datos){
                               $("#area_entera").html("");
-                              $("#usuarios").html("");
+                              $(".usuarios").html("");
                                mapdos.setView([19.432679,-99.133236], 5);
                                mapdos.markerLayer.eachLayer(  
                                  function(l) { mapdos.markerLayer.removeLayer(l); }
