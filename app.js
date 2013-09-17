@@ -124,6 +124,7 @@ app.post('/changeStatus',function(req,res){
                                                           // io.sockets.broadcast.emit('list',JSON.stringify(results));
                                                            //console.log(results);
                                                            io.sockets.emit('refresh',JSON.stringify(results));
+                                                           res.send({"response":"ok"});
 
 
 
