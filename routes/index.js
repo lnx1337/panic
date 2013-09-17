@@ -56,7 +56,20 @@ exports.alert=function(req,res){
  db.join('tbl_alert_type','tbl_panic_alerts.alert_type_id=tbl_alert_type.id')
  db.where("tbl_panic_alerts.id="+req.params.id)
  .get('tbl_panic_alerts', function(err, results, fields) {
-    res.send(results);
+
+
+
+   db.select(['tbl_fotos.url,tbl_fotos.longitude,tbl_fotos.latitude']);
+   db.join('tbl_fotos_has_tbl_panic_alerts','tbl_fotos_has_tbl_panic_alerts.tbl_fotos_id=tbl_fotos.id')
+   db.where('tbl_fotos_has_tbl_panic_alerts.tbl_panic_alerts_id='+req.params.id).get('tbl_fotos'),function(err,results,fields){
+    console.log(results)
+   }); 
+
+
+   res.send(results);
+
+
+
 });
 
 
