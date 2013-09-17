@@ -62,7 +62,11 @@ exports.alert=function(req,res){
    db.select(['tbl_fotos.url,tbl_fotos.longitude,tbl_fotos.latitude']);
    db.join('tbl_fotos_has_tbl_panic_alerts','tbl_fotos_has_tbl_panic_alerts.tbl_fotos_id=tbl_fotos.id')
    db.where('tbl_fotos_has_tbl_panic_alerts.tbl_panic_alerts_id='+req.params.id).get('tbl_fotos',function(err,fotos,fields){
-     res.send(results.fotos=fotos);
+     results.fotos=fotos;
+     
+
+     res.send(results);
+
    }); 
 
 
