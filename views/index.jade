@@ -107,8 +107,18 @@ block content
       $(".changeStatus").live("click",function(){
        
         var id= $(this).attr('id');
-       
-        alert(id);
+         
+         $.ajax({
+                          type: "GET",
+                          url: "/changeStatus",
+                          data: "id="+id,
+                          success: function(datos){
+                            alert("Atendido");
+                            return false;
+                          }
+                  }); 
+
+          return false;
 
       });
         

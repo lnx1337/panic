@@ -111,7 +111,7 @@ app.get('/abonados', user.list);
 
 
 app.post('/changeStatus',function(req,res){
-    var newData = { status:req.body.status };
+    var newData = { status:0 };
     db.where({ id:req.body.id });
     db.update('tbl_panic_alerts', newData, function(err) {
             if (!err) {
