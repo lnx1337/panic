@@ -109,12 +109,26 @@ app.get('/abonados', user.list);
 
 
 
+
 app.post('/changueStatus',function(req,res){
     var newData = { status:req.body.status };
     db.where({ id:req.body.id });
     db.update('tbl_panic_alerts', newData, function(err) {
             if (!err) {
-                console.log('Updated!');
+
+                            db.select(['tbl_abonados.id as abonado_id','tbl_panic_alerts.id as alert_id','tbl_panic_alerts.abonado_id','tbl_panic_alerts.alert_type_id','tbl_alert_type.description as descriptionAlert','tbl_abonados.name','tbl_abonados.name','tbl_abonados.FirstName','tbl_catalog_mass_media.description as mediaDescription','tbl_panic_alerts.latitude','tbl_panic_alerts.longitude']);
+                                                    db.join('tbl_abonados', 'tbl_abonados.id = tbl_panic_alerts.abonado_id')
+                                                    db.join('tbl_catalog_mass_media','tbl_abonados.massmed_id = tbl_catalog_mass_media.id')
+                                                    db.join('tbl_alert_type','tbl_panic_alerts.alert_type_id=tbl_alert_type.id and tbl_panic_alerts.status=1')
+                                                     .get('tbl_panic_alerts', function(err, results, fields) {
+                                                          // io.sockets.broadcast.emit('list',JSON.stringify(results));
+                                                           //console.log(results);
+                                                           io.sockets.emit('refresh',JSON.stringify(results));
+
+
+
+                                                     });
+
             }
         });
 });
@@ -196,7 +210,7 @@ app.post('/',function(req,res){
                                                     db.select(['tbl_abonados.id as abonado_id','tbl_panic_alerts.id as alert_id','tbl_panic_alerts.abonado_id','tbl_panic_alerts.alert_type_id','tbl_alert_type.description as descriptionAlert','tbl_abonados.name','tbl_abonados.name','tbl_abonados.FirstName','tbl_catalog_mass_media.description as mediaDescription','tbl_panic_alerts.latitude','tbl_panic_alerts.longitude']);
                                                     db.join('tbl_abonados', 'tbl_abonados.id = tbl_panic_alerts.abonado_id')
                                                     db.join('tbl_catalog_mass_media','tbl_abonados.massmed_id = tbl_catalog_mass_media.id')
-                                                    db.join('tbl_alert_type','tbl_panic_alerts.alert_type_id=tbl_alert_type.id')
+                                                    db.join('tbl_alert_type','tbl_panic_alerts.alert_type_id=tbl_alert_type.id and tbl_panic_alerts.status=1')
                                                      .get('tbl_panic_alerts', function(err, results, fields) {
                                                           // io.sockets.broadcast.emit('list',JSON.stringify(results));
                                                            //console.log(results);
