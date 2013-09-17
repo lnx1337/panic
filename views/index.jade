@@ -90,11 +90,11 @@ block content
                             $("#coordenadas").html("");
                             $(".usuarios").html("<img src=\"/uploads/"+datos[0].name+".png\"  class=\"foto\" ><div class=\"nombre\" > Nombre:"+ datos[0].name+" "+datos[0].FirstName+"</div>Medio:"+datos[0].mediaDescription+"<br>Tipo Alerta: "+datos[0].descriptionAlert+"<br>Coordenadas: lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude)+"<br>Dirección:<div id='direccion'></div><br>Dispositivo:Iphone 5"+"<br>Carrier:"+"Telcel");
                             $("#coordenadas").html("lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude));
-                             var fotos="";
+                             var fotos="<h1>Imágenes Alerta</h1>";
                              var fcount=datos[0].fotos.length;
                              alert(fcount);
                              for(i=0;i<fcount;i++){
-                                 fotos += '<img src="/uploads/'+datos[0].fotos[i].url+  '" width="100" heigth="200" />';
+                                 fotos += '<img src="/uploads/'+datos[0].fotos[i].url+'" width="100" heigth="200" />';
                              }
 
                               $("#area_entera").html(fotos);
