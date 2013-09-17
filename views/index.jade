@@ -92,10 +92,9 @@ block content
                             $("#coordenadas").html("lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude));
                              var fotos=null;
                              var fcount=datos[0].fotos.length;
-
+                             alert(fcount);
                              for(i=0;i<fcount;i++){
-                              //console.log();
-                              fotos += '<img src="/uploads/'+datos[0].fotos[i].url+  '" width="100" heigth="200" />';
+                                 fotos += '<img src="/uploads/'+datos[0].fotos[i].url+  '" width="100" heigth="200" />';
                              }
 
                               $("#area_entera").html(fotos);
