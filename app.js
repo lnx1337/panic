@@ -58,6 +58,7 @@ var db = new Db.Adapter({
 
 */
 
+app.use(express.multipart());
 
 
 var server= http.createServer(app).listen(app.get('port'), function(){
@@ -140,7 +141,6 @@ app.post('/changeStatus',function(req,res){
 app.post('/',function(req,res){
 
 
-console.log(req.files);
 
 
   var cabonado_id=req.body.abonado_id;
