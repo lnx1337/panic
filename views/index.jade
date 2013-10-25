@@ -3,17 +3,7 @@ block content
   #map  
   #encabezado
       h5 CENTRO NACIONAL DE ATENCION BOTON DE PANICO MONITOREO DE ALERTAS
-  #seccion1
-     .area_media
-        .usuarios
-          .nombre 
-          #coordenadas2 
-     .area_media  
-   
-  #seccion2
-      #area_entera  
-  #mapdos  
-  #menu
+    #menu
       .boton
         img(src='/images/uno.png', alt='', id="reset")
       .boton
@@ -24,6 +14,18 @@ block content
         img(src='/images/cuatro.png', alt='')
       .boton
         img(src='/images/cinco.png', alt='')
+  #seccion1
+     .area_media
+        .usuarios
+          .nombre 
+          #coordenadas2
+        #status   
+     .area_media  
+   
+  #seccion2
+      #area_entera  
+  #mapdos  
+ 
   #coordenadas 
 
   script
@@ -44,9 +46,9 @@ block content
                   var marker = e.layer,
                       feature = marker.feature;
                       
-                  var popupContent =  '<h1>'+feature.properties.description+'</h1><a target="_blank" class="popup" href="' + feature.properties.url + '">' +
+                  var popupContent =  '<h4>'+feature.properties.description+'</h4><a target="_blank" class="popup" href="' + feature.properties.url + '">' +
                                           '<img src="' + feature.properties.image + '">' +
-                                      '   <h2>' + feature.properties.city + '</h2>' +
+                                      '   <h5>' + feature.properties.city + '</h5>' +
                                       '</a>';
                   marker.bindPopup(popupContent,{
                       closeButton: false,
@@ -90,10 +92,42 @@ block content
                             $("#coordenadas").html("");
                             $(".usuarios").html("<img src=\"/uploads/"+datos[0].name+".png\"  class=\"foto\" ><div class=\"nombre\" > Nombre:"+ datos[0].name+" "+datos[0].FirstName+"</div>Medio:"+datos[0].mediaDescription+"<br>Tipo Alerta: "+datos[0].descriptionAlert+"<br>Coordenadas: lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude)+"<br>Dirección:<div id='direccion'></div><br>Dispositivo:Iphone 5"+"<br>Carrier:"+"Telcel");
                             $("#coordenadas").html("lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude));
+                            $("#status").html('<a href="#" id="'+datos[0].alert_id +'" class="changeStatus" > Atendido </a>');
+                             var fotos="<h5>Imágenes Alerta</h5>";
+                             var fcount=datos[0].fotos.length;
+                             for(i=0;i<fcount;i++){
+                                 fotos += '<img src="/uploads/'+datos[0].fotos[i].url+'" width="100" heigth="200" />';
+                             }
+
+                              $("#area_entera").html(fotos);
                           }
                   }); 
        });
 
+
+      $(".changeStatus").live("click",function(){
+       
+        var id= $(this).attr('id');
+         
+         $.ajax({
+                          type: "POST",
+                          url: "/changeStatus",
+                          data: "id="+id,
+                          success: function(datos){
+                              $("#area_entera").html("");
+                              $(".usuarios").html("");
+                               mapdos.setView([19.432679,-99.133236], 5);
+                               mapdos.markerLayer.eachLayer(  
+                                 function(l) { mapdos.markerLayer.removeLayer(l); }
+                               );
+
+                              return false;
+                          }
+                  }); 
+
+          return false;
+
+      });
         
               var socket  = io.connect('http://sspdemo.cloudapp.net');
               socket.on('conectado', function(data) {
@@ -107,7 +141,7 @@ block content
              map.markerLayer.on('ready', function(e) {
                     var markers = [];
                     this.eachLayer(function(marker) { markers.push(marker); });
-                    cycle(markers);
+                    //cycle(markers);
              });
 
             

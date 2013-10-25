@@ -24,7 +24,7 @@ exports.index = function(req, res){
  db.select(['tbl_abonados.id as abonado_id','tbl_panic_alerts.id as alert_id','tbl_panic_alerts.abonado_id','tbl_panic_alerts.alert_type_id','tbl_alert_type.description as descriptionAlert','tbl_abonados.name','tbl_abonados.name','tbl_abonados.FirstName','tbl_catalog_mass_media.description as mediaDescription','tbl_panic_alerts.latitude','tbl_panic_alerts.longitude']);
  db.join('tbl_abonados', 'tbl_abonados.id = tbl_panic_alerts.abonado_id')
  db.join('tbl_catalog_mass_media','tbl_abonados.massmed_id = tbl_catalog_mass_media.id')
- db.join('tbl_alert_type','tbl_panic_alerts.alert_type_id=tbl_alert_type.id')
+ db.join('tbl_alert_type','tbl_panic_alerts.alert_type_id=tbl_alert_type.id and tbl_panic_alerts.status=1')
 .get('tbl_panic_alerts', function(err, results, fields) {
          	 
     res.render('index',{data:results});
@@ -48,7 +48,7 @@ exports.form=function(req,res){
 
 
 exports.alert=function(req,res){
-
+var response=null;
   
  db.select(['tbl_abonados.id as abonado_id','tbl_panic_alerts.id as alert_id','tbl_panic_alerts.abonado_id','tbl_panic_alerts.alert_type_id','tbl_alert_type.description as descriptionAlert','tbl_abonados.name','tbl_abonados.FirstName','tbl_catalog_mass_media.description as mediaDescription','tbl_panic_alerts.latitude','tbl_panic_alerts.longitude']);
  db.join('tbl_abonados', 'tbl_abonados.id = tbl_panic_alerts.abonado_id')
@@ -56,7 +56,26 @@ exports.alert=function(req,res){
  db.join('tbl_alert_type','tbl_panic_alerts.alert_type_id=tbl_alert_type.id')
  db.where("tbl_panic_alerts.id="+req.params.id)
  .get('tbl_panic_alerts', function(err, results, fields) {
-    res.send(results);
+
+
+
+   db.select(['tbl_fotos.url,tbl_fotos.longitude,tbl_fotos.latitude']);
+   db.join('tbl_fotos_has_tbl_panic_alerts','tbl_fotos_has_tbl_panic_alerts.tbl_fotos_id=tbl_fotos.id')
+   db.where('tbl_fotos_has_tbl_panic_alerts.tbl_panic_alerts_id='+req.params.id).get('tbl_fotos',function(err,fotos,fields){
+   results[0].fotos=fotos;
+
+     response=results;
+     
+
+     res.send(response);
+
+   }); 
+
+
+   
+
+
+
 });
 
 
