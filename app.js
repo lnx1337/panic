@@ -140,7 +140,7 @@ app.post('/changeStatus',function(req,res){
 app.post('/',function(req,res){
 
 
-console.log(req.files.file.path);
+console.log(req.files.displayImage);
 
 
 
