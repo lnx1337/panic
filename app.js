@@ -141,7 +141,7 @@ app.post('/',function(req,res){
 
 
 console.log(req.files);
-/*
+
 
   var cabonado_id=req.body.abonado_id;
   var calert_type_id=req.body.alert_type_id;
@@ -249,7 +249,6 @@ console.log(req.files);
 }
 
 
-*/
     
 
 });
