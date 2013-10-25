@@ -113,7 +113,7 @@ app.post('/',function(req,res){
 
 
 console.log(req.files);
-
+/*
 
 
   var cabonado_id=req.body.abonado_id;
@@ -125,6 +125,9 @@ console.log(req.files);
    if(req.files!=null){
 
       fs.readFile(req.files.displayImage.path, function (err, data) {
+     
+
+
       var picture=getName();
       var newPath =__dirname+"/public/uploads/"+picture;
 
@@ -216,6 +219,7 @@ console.log(req.files);
 }
 
 
+*/
     
 
 });
