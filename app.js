@@ -140,8 +140,7 @@ app.post('/changeStatus',function(req,res){
 app.post('/',function(req,res){
 
 
-console.log(req.files.displayImage);
-
+console.log(req.files);
 
 
   var cabonado_id=req.body.abonado_id;
