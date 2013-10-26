@@ -148,15 +148,13 @@ app.post('/',function(req,res){
   var clatitude=req.body.latitude;
   var clongitude=req.body.longitude;
 
-
+ console.log(req);
    if(req.files!=null){
-
+console.log("entro");
 
     console.log(req.files.file.path);
 
-       //res.send("PUTO!!");
-      //req.files.displayImage.path
-      
+       
       fs.readFile(req.files.file.path, function (err, data) {
      
 
