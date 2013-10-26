@@ -152,7 +152,9 @@ app.post('/',function(req,res){
    if(req.files!=null){
 
 
-    console.log(req.files.file);
+    console.log(req.files.file.path);
+
+    res.send("PUTO!!");
 
 
 /*
