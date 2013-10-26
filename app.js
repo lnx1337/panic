@@ -172,10 +172,10 @@ app.post('/',function(req,res){
           var result = '{"stdout":' + stdout + ',"stderr":"' + stderr + '","cmd":"' + cmd + '"}';    
           var json=JSON.parse(stdout);
           
-          console.log(json+"json");
+          console.log(json[0]+json[1]);
+           
             if(json[0].GPSLatitude!=null &&json[0].GPSLongitude){
 
-console.log("ebtro json befire insert");
              var Latitude=json[0].GPSLatitude.split(' ');
              var Longitude=json[0].GPSLongitude.split(' ');
 
