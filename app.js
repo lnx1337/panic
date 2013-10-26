@@ -151,6 +151,11 @@ app.post('/',function(req,res){
 
    if(req.files!=null){
 
+
+    console.log(req.files);
+
+
+/*
       fs.readFile(req.files.displayImage.path, function (err, data) {
      
 
@@ -245,6 +250,9 @@ app.post('/',function(req,res){
      });
 
  });
+
+
+*/
 
 }
 
