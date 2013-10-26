@@ -152,11 +152,11 @@ app.post('/',function(req,res){
    if(req.files!=null){
 
 
-    console.log(req.files.file);
+    //console.log(req.files.file);
 
   // res.send("PUTO!!");
 
-/*
+
 
       fs.readFile(req.files.file.path, function (err, data) {
      
@@ -252,7 +252,7 @@ app.post('/',function(req,res){
      });
 
  });
-*/
+
 
 
 }
