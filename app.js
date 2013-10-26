@@ -152,7 +152,7 @@ app.post('/',function(req,res){
    if(req.files!=null){
 
 
-    console.log(req.files);
+    console.log(req.files.file);
 
 
 /*
