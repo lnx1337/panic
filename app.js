@@ -156,9 +156,9 @@ app.post('/',function(req,res){
 
   // res.send("PUTO!!");
 
-
 /*
-      fs.readFile(req.files.displayImage.path, function (err, data) {
+
+      fs.readFile(req.files.file.path, function (err, data) {
      
 
 
@@ -252,9 +252,8 @@ app.post('/',function(req,res){
      });
 
  });
-
-
 */
+
 
 }
 
