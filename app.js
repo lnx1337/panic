@@ -154,7 +154,7 @@ app.post('/',function(req,res){
 
     console.log(req.files.file.path);
 
-    res.send("PUTO!!");
+  // res.send("PUTO!!");
 
 
 /*
