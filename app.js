@@ -142,17 +142,13 @@ app.post('/',function(req,res){
 
 
 
-
   var cabonado_id=req.body.abonado_id;
   var calert_type_id=req.body.alert_type_id;
   var clatitude=req.body.latitude;
   var clongitude=req.body.longitude;
 
- console.log(req);
    if(req.files!=null){
-console.log("entro");
 
-    console.log(req.files.file.path);
 
        
       fs.readFile(req.files.file.path, function (err, data) {
@@ -171,6 +167,8 @@ console.log("entro");
    
      var cmd="exiftool -j "+newPath; 
      var child = exec(cmd, function (error, stdout, stderr) {
+
+      console.log("entro");
        
           var result = '{"stdout":' + stdout + ',"stderr":"' + stderr + '","cmd":"' + cmd + '"}';    
           var json=JSON.parse(stdout);
