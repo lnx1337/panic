@@ -65,7 +65,7 @@ var response=null;
 
 
 
-             db.select(['id,alert_id,abonado_id,alert_type_id,latitude,longitude,datetime']);
+             db.select(['id,alert_id,abonado_id,alert_type_id,latitude,longitude,dat_time']);
 
              db.where('alert_id='+req.params.id).get('tbl_tracking_gps',function(err,trakingGPS,fields){
 
