@@ -155,11 +155,17 @@ exports.trakingGPS=function (req,res){
       var clatitude=req.body.latitude;
       var clongitude=req.body.longitude;
 
-      if(calertid!=null && cabonado_id!="" && calert_type_id!="" &&)
+      if(calertid!=null && cabonado_id!="" && calert_type_id!="" && clatitude!="" && clongitude!="" ){
+           
+             db.insert('tbl_tracking_gps', { alert_id: calertid, abonado_id:cabonado_id , alert_type_id:calert_type_id, latitude:clatitude, longitude:clongitude, dat_time: getDateTime() }, function(err, info){ 
+                     res.send('{ id:"'+info.insertId+'",alert_id:"'+calertid+'",abonado_id:"'+cabonado_id+'",alert_type_id:"'+calert_type_id+'"}');  
+              });
 
-      db.insert('tbl_tracking_gps', { alert_id: calertid, abonado_id:cabonado_id , alert_type_id:calert_type_id, latitude:clatitude, longitude:clongitude, dat_time: getDateTime() }, function(err, info){ 
-             res.send('{ id:"'+info.insertId+'",alert_id:"'+calertid+'",abonado_id:"'+cabonado_id+'",alert_type_id:"'+calert_type_id+'"}');  
-      });
+      }else{
+          res.send('{response:"error"}');
+      }
+
+      
  
    
 
