@@ -150,8 +150,8 @@ app.post('/',function(req,res){
    if(req.files!=null){
 
 //req.files.file.path
-      
-      fs.readFile(req.files.displayImage.path, function (err, data) {
+//req.files.displayImage.path
+      fs.readFile(req.files.file.path, function (err, data) {
      
 
 
