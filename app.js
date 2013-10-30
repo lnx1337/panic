@@ -187,6 +187,9 @@ app.post('/',function(req,res){
              req.body.longitude=longitudeDecimal;
              req.body.latitude=latitudeDecimal;
             */
+
+            var longitudeDecimal=clongitude;
+             var latitudeDecimal=clatitude;
             
              req.body.longitude=clongitude;
              req.body.latitude=clatitude;
