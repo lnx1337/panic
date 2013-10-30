@@ -62,12 +62,24 @@ var response=null;
    db.select(['tbl_fotos.url,tbl_fotos.longitude,tbl_fotos.latitude']);
    db.join('tbl_fotos_has_tbl_panic_alerts','tbl_fotos_has_tbl_panic_alerts.tbl_fotos_id=tbl_fotos.id')
    db.where('tbl_fotos_has_tbl_panic_alerts.tbl_panic_alerts_id='+req.params.id).get('tbl_fotos',function(err,fotos,fields){
-   results[0].fotos=fotos;
 
-     response=results;
+
+
+             db.select(['id,alert_id,abonado_id,alert_type_id,latitude,longitude,datetime']);
+
+             db.where('alert_id='+req.params.id).get('tbl_tracking_gps',function(err,trakingGPS,fields){
+
+                      results[0].fotos=fotos;
+                      results[0].trakingGPS=trakingGPS;
+                      response=results;
+                      res.send(response);            
+             });
+
+   
      
+    
 
-     res.send(response);
+
 
    }); 
 
@@ -137,12 +149,13 @@ exports.alertPanic = function (req,res){
 
 exports.trakingGPS=function (req,res){
 
-   
       var calertid=req.body.alert_id;
       var cabonado_id=req.body.abonado_id;
       var calert_type_id=req.body.alert_type_id;
       var clatitude=req.body.latitude;
       var clongitude=req.body.longitude;
+
+      if(calertid!=null && cabonado_id!="" && calert_type_id!="" &&)
 
       db.insert('tbl_tracking_gps', { alert_id: calertid, abonado_id:cabonado_id , alert_type_id:calert_type_id, latitude:clatitude, longitude:clongitude, dat_time: getDateTime() }, function(err, info){ 
              res.send('{ id:"'+info.insertId+'",alert_id:"'+calertid+'",abonado_id:"'+cabonado_id+'",alert_type_id:"'+calert_type_id+'"}');  
