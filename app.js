@@ -176,18 +176,22 @@ app.post('/',function(req,res){
           json[0].GPSLongitude=clongitude;          
            
             if(json[0].GPSLatitude!=null &&json[0].GPSLongitude){
-
+             /*
              var Latitude=json[0].GPSLatitude.split(' ');
              var Longitude=json[0].GPSLongitude.split(' ');
 
              var longitudeDecimal=decimalCoorsLong(Longitude);
              var latitudeDecimal=decimalCoorsLat(Latitude);
-
+            */
+            /*
              req.body.longitude=longitudeDecimal;
              req.body.latitude=latitudeDecimal;
+            */
+            
+             req.body.longitude=clongitude;
+             req.body.latitude=clatitude;
              req.body.picture=picture;      
              
-             console.log(req.body);
 
 
 
