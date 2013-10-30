@@ -72,7 +72,7 @@ var response=null;
                       results[0].fotos=fotos;
                       results[0].trakingGPS=trakingGPS;
                       response=results;
-                      res.send(response);            
+                      //res.send(response);            
              });
 
    
