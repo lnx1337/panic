@@ -69,10 +69,12 @@ var response=null;
 
              db.where('alert_id='+req.params.id).get('tbl_tracking_gps',function(err,trakingGPS,fields){
 
+
+console.log(err);
                       results[0].fotos=fotos;
                       results[0].trakingGPS=trakingGPS;
                       response=results;
-                      //res.send(response);            
+                      res.send(response);            
              });
 
    
