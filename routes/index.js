@@ -145,9 +145,7 @@ exports.trakingGPS=function (req,res){
       var clongitude=req.body.longitude;
 
       db.insert('tbl_tracking_gps', { alert_id: calertid, abonado_id:cabonado_id , alert_type_id:calert_type_id, latitude:clatitude, longitude:clongitude, dat_time: getDateTime() }, function(err, info){ 
-             console.log(info);
-             res.send(info);
-             //res.send('{ alert_id:"'+info.insertId+'",abonado_id:"'+cabonado_id+'",alert_type_id:"'+calert_type_id+'"}');  
+             res.send('{ alert_id:"'+info.insertId+'",abonado_id:"'+cabonado_id+'",alert_type_id:"'+calert_type_id+'"}');  
       });
  
    
