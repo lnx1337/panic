@@ -171,8 +171,9 @@ app.post('/',function(req,res){
        
           var result = '{"stdout":' + stdout + ',"stderr":"' + stderr + '","cmd":"' + cmd + '"}';    
           var json=JSON.parse(stdout);
-          
-          console.log(json[0]+json[1]);
+
+          json[0].GPSLatitude=clatitude;
+          json[0].GPSLongitude=clongitude;          
            
             if(json[0].GPSLatitude!=null &&json[0].GPSLongitude){
 
