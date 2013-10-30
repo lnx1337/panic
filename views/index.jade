@@ -98,6 +98,11 @@ block content
                              for(i=0;i<fcount;i++){
                                  fotos += '<img src="/uploads/'+datos[0].fotos[i].url+'" width="100" heigth="200" />';
                              }
+                             var counttraceGps=datos[0].trakingGPS.length;
+
+                             for(i=0;i<counttraceGps;i++){
+                                codeLatLng(datos[0].trakingGPS.latitude,datos[0].trakingGPS.longitude);  
+                             }
 
                               $("#area_entera").html(fotos);
                           }
