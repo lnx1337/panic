@@ -1,6 +1,5 @@
 extends layout
 block content
-
  script
    var map = null;
    function initializeMaps(mapElement, mapOptions) {
@@ -11,7 +10,7 @@ block content
    	center: mapOptions.center || new google.maps.LatLng(lat,lng),
    	  mapTypeId: google.maps.MapTypeId.ROADMAP
    	});
-        
+
         return new google.maps.Map(mapElement, mapOptions);
     }
 
