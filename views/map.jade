@@ -1,10 +1,7 @@
 extends layout
 block content
  script
-  function hola(){
-    alert("hola");
-  }
-     var map = null;
+   var map = null;
    function initializeMaps(mapElement, mapOptions) {
     var lat = mapOptions.centerLat || 0;
     var lng = mapOptions.centerLng || 0;
@@ -17,6 +14,831 @@ block content
    }
 
 
+    $.fn.putMarker = function(address, mapParameters, screenSlug, screenName, screenDescription, photo, centerMap, ajaxParameters) {
+        var mapElement = $(this[0]).get(0);
+      var map = mapParameters.map == undefined ? initializeMaps(mapElement, mapParameters) : mapParameters.map;
+        
+        var location = new google.maps.LatLng(address.latitude, address.longitude);
+
+        var marker = new google.maps.Marker({
+            map: map,
+            title: address.title,
+            draggable: false,
+            icon: mapParameters.icon || 'http://bus-tops.com/static/img/map-icon.png'
+        });
+        
+        setMarkerEvents(marker, "http://bus-tops.com/", screenSlug, screenName, screenDescription, photo, map, ajaxParameters);
+        marker.setPosition(location);
+        if( centerMap ) {
+            map.setCenter(location);
+        }
+    };
+   $.fn.putScreens = function(mapParameters) { 
+        var mapElement = $(this[0]).get(0);
+        if( mapElement.tagName.toLowerCase() != "div" ) {
+            throw "drawRoute exception: only <div> tags are supported";
+        }
+
+    if(!map)
+          map = initializeMaps(mapElement, mapParameters);
+          mapParameters['map']
+    
+    
+            address = {
+              'latitude': "51.568861",
+              'longitude': "-0.118318",
+              'title': "Almington"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'almington', 
+        'Almington', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.43628",
+              'longitude': "-0.380359",
+              'title': "Apex"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'apex', 
+        'Apex', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.536619",
+              'longitude': "-0.08862",
+              'title': "Baring"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'baring', 
+        'Baring', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.493041",
+              'longitude': "0.094274",
+              'title': "Boughton"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'boughton', 
+        'Boughton', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.363036",
+              'longitude': "-0.103303",
+              'title': "Bowling"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'bowling', 
+        'Bowling', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.601759",
+              'longitude': "-0.288059",
+              'title': "Brides"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'brides', 
+        'Brides', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.6216",
+              'longitude': "-0.273296",
+              'title': "Broadfields"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'broadfields', 
+        'Broadfields', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.58888",
+              'longitude': "-0.283783",
+              'title': "Cowbridge"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'cowbridge', 
+        'Cowbridge', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.506679",
+              'longitude': "0.124444",
+              'title': "Curlew"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'curlew', 
+        'Curlew', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.435685",
+              'longitude': "-0.055532",
+              'title': "Dartmouth"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'dartmouth', 
+        'Dartmouth', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.527958",
+              'longitude': "-0.077881",
+              'title': "Drysdale"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'drysdale', 
+        'Drysdale', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.54454",
+              'longitude': "-0.07611",
+              'title': "Forest"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'forest', 
+        'Forest', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.356474",
+              'longitude': "-0.307757",
+              'title': "Garrison"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'garrison', 
+        'Garrison', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.525213",
+              'longitude': "-0.09951",
+              'title': "Goswell"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'goswell', 
+        'Goswell', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.562985",
+              'longitude': "-0.1793",
+              'title': "Jack"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'jack', 
+        'Jack', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.508803",
+              'longitude': "-0.134271",
+              'title': "Jermyn"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'jermyn', 
+        'Jermyn', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.557566",
+              'longitude': "-0.138917",
+              'title': "Junction"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'junction', 
+        'Junction', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.584363",
+              'longitude': "-0.282598",
+              'title': "Kingsbury"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'kingsbury', 
+        'Kingsbury', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.551566",
+              'longitude': "-0.185051",
+              'title': "Langland"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'langland', 
+        'Langland', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.578523",
+              'longitude': "-0.073085",
+              'title': "Lealand"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'lealand', 
+        'Lealand', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.522389",
+              'longitude': "0.048666",
+              'title': "Lonsdale"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'lonsdale', 
+        'Lonsdale', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.420774",
+              'longitude': "-0.151545",
+              'title': "Nimrod"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'nimrod', 
+        'Nimrod', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.372691",
+              'longitude': "0.087172",
+              'title': "Orpington"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'orpington', 
+        'Orpington', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.514131",
+              'longitude': "-0.410475",
+              'title': "Precinct"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'precinct', 
+        'Precinct', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.595382",
+              'longitude': "-0.233438",
+              'title': "Southfields"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'southfields', 
+        'Southfields', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.489594",
+              'longitude': "-0.014205",
+              'title': "Spindrift"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'spindrift', 
+        'Spindrift', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.5206",
+              'longitude': "-0.074673",
+              'title': "Spitalfields"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'spitalfields', 
+        'Spitalfields', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.586503",
+              'longitude': "-0.001953",
+              'title': "Wood"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'wood', 
+        'Wood', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+            address = {
+              'latitude': "51.575383",
+              'longitude': "-0.203655",
+              'title': "Woodstock"
+            };
+            
+      $(this).putMarker(
+        address,
+        {'map': map},
+        'woodstock', 
+        'Woodstock', 
+        '', 
+        "None",
+        null,
+        mapParameters
+      );
+    
+    
+    
+      
+   }
+
+     /*
+     * /geocoding / directions routing
+     */
+
+     /*
+     * markers functions
+     */
+    function setMarkerEvents(marker, screensUrl, screenSlug, screenName, screenDescription, photo, map, ajaxParameters) {
+        google.maps.event.addListener(marker, 'click', function() {
+            if( ajaxParameters == undefined ) {
+                var url = screensUrl + screenSlug;
+                window.location.href = url;
+            }
+            else {
+                var url = ajaxParameters.url + "&screenSlug="+screenSlug;
+                $("#"+ajaxParameters.targetElementId).load(url);
+            }
+
+        });
+        if (!photo || photo == "None") {
+            photo = "http://bus-tops.com/static/images/screen-hold-graphic.jpg";
+        }
+        google.maps.event.addListener(marker, 'mouseover', function() {
+            new ScreenInfoWindow(marker, "<div class='screen-info-window'><div class='screen-info-content'><div class='screen-photo'><img width='256' height='80' src='"+photo+"' /><div class='grid'>&nbsp;</div></div><p class='screen-content'><span class='screen-name'>"+screenName+"</span><br />"+screenDescription+"</p></div><div class='screen-info-footer'>&nbsp;</div></div>", map);
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+      window.location.href = screensUrl + screenSlug;
+        });
+
+        $('.marker-'+screenSlug).mouseenter(function(){
+            var infoWindow = new ScreenInfoWindow(marker, "<div class='screen-info-window'><div class='screen-info-content'><div class='screen-photo'><img width='256' height='80' src='"+photo+"' /><div class='grid'>&nbsp;</div></div><p class='screen-content'><span class='screen-name'>"+screenName+"</span><br />"+screenDescription+"</p></div><div class='screen-info-footer'>&nbsp;</div></div>", map);
+            $(this).data('infoWindow', infoWindow);
+        });
+        $('.marker-'+screenSlug).mouseout(function(){
+      var infoWindow = $(this).data('infoWindow');
+      infoWindow.setMap(null);
+        });
+        $('.see-marker-'+screenSlug).click(function(){
+      var infoWindow = $(this).data('infoWindow');
+      infoWindow.setMap(null);
+      infoWindow = new ScreenInfoWindow(marker, "<div class='screen-info-window'><div class='screen-info-content'><div class='screen-photo'><img width='256' height='80' src='"+photo+"' /><div class='grid'>&nbsp;</div></div><p class='screen-content'><span class='screen-name'>"+screenName+"</span><br />"+screenDescription+"</p></div><div class='screen-info-footer'>&nbsp;</div></div>", map);
+            setTimeout(function(){ infoWindow.setMap(null) }, 3000);
+            $('body,html').animate({ scrollTop: 0 }, {'easing': 'easeOutExpo'});
+        });
+    }
+    /*
+     * /markers functions
+     */
+
+    /*
+     * custom info window
+     */
+    function ScreenInfoWindow(marker, html, map) {
+        this._marker = marker;
+        this._html = html;
+        this._map = map;
+        this._div = null;
+        this.setMap(map);
+    }
+    ScreenInfoWindow.prototype = new google.maps.OverlayView();
+
+    ScreenInfoWindow.prototype.onAdd = function() {
+        var div = document.createElement("div");
+        div.style.position = "absolute";
+        div.innerHTML = this._html;
+        this._div = div;
+        // define info window close function and event
+        function closeInfoWindow(screenInfoWindow) {
+            return function() {
+                screenInfoWindow.setMap(null);
+            };
+        }
+        google.maps.event.addDomListener(this._marker, 'mouseout', closeInfoWindow(this));
+        // add info window to map (to float pane layer)
+        var panes = this.getPanes();
+        panes.floatPane.appendChild(div);
+    };
+
+    ScreenInfoWindow.prototype.draw = function () {
+        var marker = this._marker;
+        // marker coordinates as Point(x, y)
+        var markerOffset = this.getProjection().fromLatLngToDivPixel(marker.getPosition());
+        // position info window over marker
+        var div = this._div;
+        div.style.top = (markerOffset.y - 135) + "px";
+        div.style.left = (markerOffset.x - 133) + "px";
+    };
+
+    ScreenInfoWindow.prototype.onRemove = function() {
+        this._div.parentNode.removeChild(this._div);
+        this._div = null;
+    };
+    
+    /*
+     * /custom screen info window
+     */
+
+    $(function() {
+            $( "input:submit, a, button", ".upload" ).button();
+            $( "button" )
+                    .click(function() {
+                    $( "#dialog" ).dialog( "open" );
+                    });
+    });
+    
+
+    $(document).ready(function () {
+    var mapStyles = [
+      {
+        featureType: 'all',
+        elementType: 'geometry',
+        stylers: [
+          {hue: '#204150'},
+          {lightness: '-85'}
+        ]
+      },
+      {
+        featureType: 'all',
+        elementType: 'labels',
+        stylers: [
+          {hue: '#204150'},
+          {invert_lightness: true}
+        ]
+      },
+      {
+        featureType: 'road',
+        elementType: 'geometry',
+        stylers: [
+          {hue: '#204150'},
+          {saturation: '-85'},
+          {lightness: '20'}
+        ]
+      },
+      {
+        featureType: 'road',
+        elementType: 'labels',
+        stylers: [
+          {visibility: 'off'}
+        ]
+      },
+      {
+        featureType: 'poi',
+        stylers: [
+          {hue: '#204150'},
+          {lightness: '10'}
+        ]
+      },
+      {
+        featureType: 'landscape.natural',
+        stylers: [
+          {hue: '#204150'},
+          {lightness: '-50'}
+        ]
+      },
+      {
+        featureType: 'water',
+        stylers: [
+          {hue: '#204150'},
+          {lightness: '15'}
+        ]
+      }
+    ];
+
+        var mapOptions = {
+            'center': new google.maps.LatLng(51.500152, -0.126236)
+        };
+
+        $("#screen_map").putScreens(mapOptions);
+    map.setOptions({'styles': mapStyles});
+      });
 
 
+      $(function() {
+        $( "#dialog" ).dialog( {
+                autoOpen: false,
+                width: 460
+            } );
 
+            $( "#signin-link" )
+                .click(function() {
+                $( "#dialog" ).dialog( "open" );
+                    //$( "#dialog").dialog.parent().appendTo($("form:first"));
+                    });
+            /*
+            $( "#id_signin" )
+                .click(function() {
+                     //     $( "#dialog" ).dialog( "open" );
+                    $( "#dialog").dialog.parent().appendTo($("form:first"));
+                    });
+                    */
+            /*
+            $( "#id_continue" )
+                .click(function() {
+                    //    $( "#dialog" ).dialog( "open" );
+                    $( "#dialog").dialog.parent().appendTo($("form:first"));
+                    });
+                    */
+            $( "#signup-link" )
+                .click(function() {
+                $( "#dialog" ).dialog( "open" );
+                    });
+
+            var options = {
+                target: '#dialog',
+                success: function() {
+                $('#dialog').fadeIn('slow');
+                }
+            };
+
+            $('#signin-form').submit(function() {
+                $(this).ajaxSubmit(options);
+                return false;
+            });
+
+            $('#signup-form').submit(function() {
+                // check for default values
+                $('.ctrlHolder input').each(function(index) {
+                    var id = $(this).attr('id');
+                    var label = $("label[for='"+id+"']");
+                    if( $(this).val() == label.text() ) {
+                        $(this).val("");
+                    }
+                });
+                $(this).ajaxSubmit(options);
+                return false;
+            });
+
+            $("#autosel").live("change keyup", function () {
+                $("#role-form").submit();
+            });
+      });
+
+        function hash(value) {
+            var hash = 5381;
+            value = value.toUpperCase();
+            for (var i = 0; i < value.length; i++) {
+                hash = ((hash << 5) + hash) + value.charCodeAt(i);
+            }
+            return "" + hash;
+        }
+
+        $.fn.selectRange = function(start, end) {
+            return this.each(function() {
+                if (this.setSelectionRange) {
+                    this.focus();
+                    this.setSelectionRange(start, end);
+                } else if (this.createTextRange) {
+                    var range = this.createTextRange();
+                    range.collapse(true);
+                    range.moveEnd('character', end);
+                    range.moveStart('character', start);
+                    range.select();
+                }
+            });
+        };
+
+        $(document).ready(function () {
+
+            $('.nav li').hover(
+                function () {
+                    //show its submenu
+                    $('ul', this).slideDown(100);
+
+                },
+                function () {
+                    //hide its submenu
+                    $('ul', this).slideUp(100);
+                }
+            );
+
+            $('.nav li').hover(
+                    function () {
+                        //show its submenu
+                        $('ul', this).slideDown(100);
+
+                    },
+                    function () {
+                        //hide its submenu
+                        $('ul', this).slideUp(100);
+                    }
+            );
+            $('#nav li').hover(
+                    function () {
+                        //show its submenu
+                        $('ul', this).slideDown(100);
+
+                    },
+                    function () {
+                        //hide its submenu
+                        $('ul', this).slideUp(100);
+                    }
+            );
+
+        });
+
+        $(function() {
+          $( ".button" ).button();
+            $( "#id-date" ).datepicker();
+        });   
+ div(id="screen_map",style="width:100%; height:100%")
