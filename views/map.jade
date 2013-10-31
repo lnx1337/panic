@@ -95,7 +95,7 @@ block content
                 $("#"+ajaxParameters.targetElementId).load(url);
             }
 
-                      alert(photo);
+                     
 
         });
         if (!photo || photo == "None") {
@@ -107,6 +107,7 @@ block content
         google.maps.event.addListener(marker, 'click', function() {
            
             window.location.href = screensUrl + screenSlug;
+             alert(photo+alert_id);
         });
 
         $('.marker-'+screenSlug).mouseenter(function(){
@@ -384,7 +385,7 @@ block content
           var tam =f.length;
           var i=0;
           var geoJson=new Array();
-
+          console.log(json);
           for(i=0;i<tam;i++){
 
 
