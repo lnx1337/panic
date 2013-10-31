@@ -104,27 +104,79 @@ block content
         google.maps.event.addListener(marker, 'mouseover', function() {
             new ScreenInfoWindow(marker, "<div class='screen-info-window'><div class='screen-info-content'><div class='screen-photo'><img width='100' height='80' src='"+photo+"' /><div class='grid'>&nbsp;</div></div><p class='screen-content'><span class='screen-name'>"+screenName+"</span><br />"+screenDescription+"</p></div><div class='screen-info-footer'>&nbsp;</div></div>", map);
         });
+
+
+
         google.maps.event.addListener(marker, 'click', function() {
-           
              //window.location.href = screensUrl + screenSlug;
-             alert(photo+alert_id);
+            
+             $.ajax({
+                          type: "GET",
+                          url: "/alert/"+alert_id,
+                          data: "",
+                          success: function(datos){
+                            codeLatLng(datos[0].latitude+","+datos[0].longitude);
+                            $(".usuarios").html("");
+                            $("#coordenadas").html("");
+                            $(".usuarios").html("<img src=\"/uploads/"+datos[0].name+".png\"  class=\"foto\" ><div class=\"nombre\" > Nombre:"+ datos[0].name+" "+datos[0].FirstName+"</div>Medio:"+datos[0].mediaDescription+"<br>Tipo Alerta: "+datos[0].descriptionAlert+"<br>Coordenadas: lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude)+"<br>Dirección:<div id='direccion'></div><br>Dispositivo:Iphone 5"+"<br>Carrier:"+"Telcel");
+                            $("#coordenadas").html("lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude));
+                            $("#status").html('<a href="#" id="'+datos[0].alert_id +'" class="changeStatus" > Atendido </a>');
+                             var fotos="<h5>Imágenes Alerta</h5>";
+                             var fcount=datos[0].fotos.length;
+                             for(i=0;i<fcount;i++){
+                                 fotos += '<img src="/uploads/'+datos[0].fotos[i].url+'" width="100" heigth="200" />';
+                             }
+                             var counttraceGps=datos[0].trakingGPS.length;
+
+                             for(i=0;i<counttraceGps;i++){
+
+
+
+
+                                   mapdos.setView(e.layer.getLatLng(), 15);
+                                      L.mapbox.markerLayer({
+                                            type: 'Feature',
+                                            geometry: {
+                                                type: 'Point',
+                                                coordinates: [datos[0].trakingGPS[i].longitude , datos[0].trakingGPS[i].latitude]
+                                            },
+                                            properties: {
+                                                title: '',
+                                                description: 'Ubicación',
+                                                'marker-size': 'small',
+                                                "marker-color":"#CC0033" 
+                                             }
+                                         }).addTo(mapdos);
+
+
+                             }
+
+                              $("#area_entera").html(fotos);
+                          }
+                  });    
+
+
         });
 
-        $('.marker-'+screenSlug).mouseenter(function(){
+
+
+
+      $('.marker-'+screenSlug).mouseenter(function(){
             var infoWindow = new ScreenInfoWindow(marker, "<div class='screen-info-window'><div class='screen-info-content'><div class='screen-photo'><img width='256' height='80' src='"+photo+"' /><div class='grid'>&nbsp;</div></div><p class='screen-content'><span class='screen-name'>"+screenName+"</span><br />"+screenDescription+"</p></div><div class='screen-info-footer'>&nbsp;</div></div>", map);
             $(this).data('infoWindow', infoWindow);
-        });
+      });
+
         $('.marker-'+screenSlug).mouseout(function(){
-      var infoWindow = $(this).data('infoWindow');
-      infoWindow.setMap(null);
+           var infoWindow = $(this).data('infoWindow');
+           infoWindow.setMap(null);
         });
-        $('.see-marker-'+screenSlug).click(function(){
-      var infoWindow = $(this).data('infoWindow');
-      infoWindow.setMap(null);
-      infoWindow = new ScreenInfoWindow(marker, "<div class='screen-info-window'><div class='screen-info-content'><div class='screen-photo'><img width='256' height='80' src='"+photo+"' /><div class='grid'>&nbsp;</div></div><p class='screen-content'><span class='screen-name'>"+screenName+"</span><br />"+screenDescription+"</p></div><div class='screen-info-footer'>&nbsp;</div></div>", map);
-            setTimeout(function(){ infoWindow.setMap(null) }, 3000);
-            $('body,html').animate({ scrollTop: 0 }, {'easing': 'easeOutExpo'});
-        });
+      $('.see-marker-'+screenSlug).click(function(){
+          var infoWindow = $(this).data('infoWindow');
+          infoWindow.setMap(null);
+          infoWindow = new ScreenInfoWindow(marker, "<div class='screen-info-window'><div class='screen-info-content'><div class='screen-photo'><img width='256' height='80' src='"+photo+"' /><div class='grid'>&nbsp;</div></div><p class='screen-content'><span class='screen-name'>"+screenName+"</span><br />"+screenDescription+"</p></div><div class='screen-info-footer'>&nbsp;</div></div>", map);
+                setTimeout(function(){ infoWindow.setMap(null) }, 3000);
+                $('body,html').animate({ scrollTop: 0 }, {'easing': 'easeOutExpo'});
+       });
     }
 
     /*
