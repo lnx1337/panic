@@ -1,8 +1,8 @@
 extends layout
 block content
 
-script
-  var map = null;
+ script
+   var map = null;
    function initializeMaps(mapElement, mapOptions) {
     	var lat = mapOptions.centerLat || 0;
     	var lng = mapOptions.centerLng || 0;
@@ -15,4 +15,4 @@ script
         return new google.maps.Map(mapElement, mapOptions);
     }
 
-div(id="screen_map",style="width:100%; height:100%")
+ 
