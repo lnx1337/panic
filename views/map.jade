@@ -490,4 +490,13 @@ block content
 
 
         });
+
+        var socket  = io.connect('http://sspdemo.cloudapp.net');
+              socket.on('conectado', function(data) {
+                      console.log("conectado"+data);
+              });
+              socket.on('refresh', function(data) {
+                  addMarker(JSON.parse(data));     
+             
+        });
  div(id="screen_map")
