@@ -130,23 +130,7 @@ block content
 
                              for(i=0;i<counttraceGps;i++){
 
-
-
-
-                                   mapdos.setView(e.layer.getLatLng(), 15);
-                                      L.mapbox.markerLayer({
-                                            type: 'Feature',
-                                            geometry: {
-                                                type: 'Point',
-                                                coordinates: [datos[0].trakingGPS[i].longitude , datos[0].trakingGPS[i].latitude]
-                                            },
-                                            properties: {
-                                                title: '',
-                                                description: 'Ubicación',
-                                                'marker-size': 'small',
-                                                "marker-color":"#CC0033" 
-                                             }
-                                         }).addTo(mapdos);
+                                   console.log(datos[0].trakingGPS[i].longitude+ datos[0].trakingGPS[i].latitude) ;
 
 
                              }
