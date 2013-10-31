@@ -315,11 +315,11 @@ ul.errorlist li {
 /*
  * gmaps
  */
-.screen-info-footer { width: 266px; height: 15px; background: url(../img/map-arrow.png) center no-repeat; }
+.screen-info-footer { width: 266px; height: 15px; background: url(/images/map-arrow.png) center no-repeat; }
 .screen-info-content { padding: 5px; font-size: 14px; width: 256px; background: #fff; overflow: auto; }
 .screen-info-content .screen-photo { width: 256px; height: 80px; margin: 0 0 5px 0; background: #000; position: relative; }
 .screen-info-content .screen-photo img { position: absolute; z-index: 0; }
-.screen-info-content .screen-photo .grid { float: left; position: absolute; z-index: 1; top: 0; left: 0; width: 256px; height: 80px; background: url(../img/grid_3.png) repeat; }
+.screen-info-content .screen-photo .grid { float: left; position: absolute; z-index: 1; top: 0; left: 0; width: 256px; height: 80px; background: url(/images/grid_3.png) repeat; }
 .screen-info-content .screen-content .screen-name { color: #f00; font-size: 18px; }
 
 /*
@@ -494,7 +494,7 @@ div#logo-container {
 
 .home_next_container { position: relative; width: 300px; height: 90px; }
 .home_next_container img { position: relative; width: 300px; height: 90px; z-index: 0; }
-.home_next_grid { background: url(../img/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 300px; height: 90px; }
+.home_next_grid { background: url(/images/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 300px; height: 90px; }
 
 .work_list_featured_container { position: relative; width: 620px; height: 200px; background-color:#666; }
 .work_list_featured_container img { position: relative; width: 620px; height: 200px; z-index: 0; }
@@ -520,7 +520,7 @@ div#logo-container {
 .screen_work_programme_item { position: relative; width: 140px; height: 45px; }
 .screen_work_programme_item.active { border: 1px solid #f00; padding: 2px; margin: -2px; }
 .screen_work_programme_item img { position: relative; width: 140px; height: 45px; z-index: 0; }
-.screen_work_programme_item .grid { background: url(../img/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 140px; height: 45px; }
+.screen_work_programme_item .grid { background: url(/images/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 140px; height: 45px; }
 .screen_work_programme_item .grid.active { top: 2px; left: 2px; }
 .screen_work_programme_item_time { text-align: center; font-size: 11px; }
 .screen_work_programme_item_separator { float: left; text-align: center; width: 20px; height: 45px; line-height: 45px; vertical-align: middle; font-size: 20px; font-weight: bold; }
@@ -564,7 +564,7 @@ div#logo-container {
 .explore_galleries_featured_container { position: relative; width: 300px; height: 44px; background-color: #444; overflow: auto; }
 .explore_galleries_featured_item { position: relative; width: 100px; height: 44px; background-color: #222; float:left; }
 .explore_galleries_featured_item img { position: relative; width: 100px; height: 44px; z-index: 0; }
-.explore_galleries_featured_grid { background: url(../img/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 300px; height: 44px; }
+.explore_galleries_featured_grid { background: url(/images/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 300px; height: 44px; }
 .explore_galleries_featured_details { padding: 3px 0 10px 0; }
 
 .explore_user_featured_container { position: relative; width: 450px; height: 200px; background-color: #666; }
@@ -572,7 +572,7 @@ div#logo-container {
 .explore_user_featured_grid { background: url(../img/grid_2.png); position: absolute; top: 0; left: 0; z-index: 1; width: 450px; height: 200px; }
 
 .explore_work_featured_container { position: relative; width: 300px; height: 90px; background-color: #222; }
-.explore_work_featured_grid { background: url(../img/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 300px; height: 90px; }
+.explore_work_featured_grid { background: url(/images/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 300px; height: 90px; }
 .explore_work_item_description { padding: 3px 0 0 0; }
 .explore_work_item { margin: 0 0 20px 0; }
 
@@ -580,24 +580,24 @@ div#logo-container {
 .response-item-container { position: relative; padding: 5px 0; border-bottom: 1px dotted #808080; overflow: auto; }
 .response-item-image { position: relative; width: 100px; height: 44px; background-color: #666; float: left; }
 .response-item-image img { position: relative; width: 100px; height: 44px; z-index: 0; }
-.response-item-image .grid { background: url(../img/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 100px; height: 44px; }
+.response-item-image .grid { background: url(/images/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 100px; height: 44px; }
 .response-item-description { float: left; padding: 13px 10px; }
 
 .user_galleries_featured_container { position: relative; width: 300px; height: 44px; background-color: #666; margin-bottom: 5px; }
 .user_galleries_featured_container img { position: relative; width: 300px; height: 44px; z-index: 0; }
-.user_galleries_featured_grid { background: url(../img/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 300px; height: 44px; }
+.user_galleries_featured_grid { background: url(/images/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 300px; height: 44px; }
 
 .galleries_featured_container { position: relative; width:940px; height: 80px; background-color: #444; overflow: auto; }
 .galleries_featured_item { position: relative; width: 313px; height: 80px; background-color: #222; float:left; }
 .galleries_featured_item img { position: relative; width: 313px; height:80px; z-index: 0; }
-.galleries_featured_grid { background: url(../img/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 940px; height:80px; }
+.galleries_featured_grid { background: url(/images/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 940px; height:80px; }
 .galleries_featured_details { padding: 3px 0 20px 0; overflow: auto; }
 .galleries_featured_details_time { float: right; color: #808080; }
 
 .recent_activity_item { position: relative; width: 300px; height: 46px; overflow: hidden; margin: 0 0 10px 0; }
 .recent_activity_image { position: relative; width: 150px; height: 46px; background-color: #222; float:left; }
 .recent_activity_image img { position: relative; width: 150px; height:46px; z-index: 0; }
-.recent_activity_image .grid { float: left; background: url(../img/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 150px; height:46px; }
+.recent_activity_image .grid { float: left; background: url(/images/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 150px; height:46px; }
 .recent_activity_description { float:left; width: 140px; padding: 6px 0 0 10px; font-size: 14px; line-height: normal; }
 .recent_activity_description.with-user { padding-top: 0; font-size: 13px; }
 .recent_activity_description.with-user .date { font-size: 11px; }
@@ -605,7 +605,7 @@ div#logo-container {
 
 .user_playlists_featured_container { position: relative; width: 300px; height: 44px; background-color: #666; margin-bottom: 5px; }
 .user_playlists_featured_container img { position: relative; width: 300px; height: 44px; z-index: 0;  }
-.user_playlists_featured_grid { background: url(../img/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 300px; height: 44px; }
+.user_playlists_featured_grid { background: url(/images/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 300px; height: 44px; }
 
 .create_tool_iframe { background: #aaa; min-width: 465px !important; width: 465px !important; color: #222; overflow-x: hidden; }
 .create_tool_iframe.big { min-width: 532px !important; width: 532px !important; }
@@ -618,7 +618,7 @@ div#logo-container {
 .works-list-item.margin { margin-right: 10px; float: left; width: 256px; }
 .works-list-item-image { position: relative; width: 256px; height: 80px; background: #000; cursor: pointer; margin-bottom: 1px; }
 .works-list-item-image img { position: relative; width: 256px; height: 80px; z-index: 0;  }
-.works-list-item-grid { background: url(../img/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 256px; height: 80px; }
+.works-list-item-grid { background: url(/images/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 256px; height: 80px; }
 .works-list-item-text { background: #000; overflow: auto; padding: 2px 5px; }
 .works-list-item-text a { color: #A00; text-decoration: none; }
 .works-list-item-text .title { float: left; font-size: 11px; }
@@ -632,7 +632,7 @@ div#logo-container {
 .playlist_item_container { position: relative; width: 696px; height: 47px; z-index: 2; margin: 0px 0px -1px 0px; border: 1px solid #808080; }
 .playlist_item_container .image { float: left; width: 22%; position: relative; }
 .playlist_item_container .image img { position: relative; width: 140px; height: 45px; z-index: 0;  }
-.playlist_item_container .image .grid { background: url(../img/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 140px; height: 45px; }
+.playlist_item_container .image .grid { background: url(/images/grid_3.png); position: absolute; top: 0; left: 0; z-index: 1; width: 140px; height: 45px; }
 .playlist_item_container .details { float: left; width: 46%; padding-top: 3px; }
 .playlist_item_container .time { float: left; width: 21%; text-align: right;  padding-top: 12px; }
 .playlist_item_container .actions { float: left; width: 11%; padding-top: 11px; }
