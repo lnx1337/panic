@@ -1,9 +1,258 @@
 extends layout
 block content
- script
-   var map = null;
-   function hola(){
-   	alert("hola");
-   }
+  #map  
+  #encabezado
+      h5 CENTRO NACIONAL DE ATENCION BOTON DE PANICO MONITOREO DE ALERTAS
+    #menu
+      .boton
+        img(src='/images/uno.png', alt='', id="reset")
+      .boton
+        img(src='/images/dos.png', alt='')
+      .boton
+        img(src='/images/tres.png', alt='')
+      .boton
+        img(src='/images/cuatro.png', alt='')
+      .boton
+        img(src='/images/cinco.png', alt='')
+  #seccion1
+     .area_media
+        .usuarios
+          .nombre 
+          #coordenadas2
+        #status   
+     .area_media  
+   
+  #seccion2
+      #area_entera  
+  #mapdos  
+ 
+  #coordenadas 
+
+  script
+      var map = L.mapbox.map('mapdos', 'lnx1337.map-eu8sxqx2');
+      var mapdos = L.mapbox.map('map', 'lnx1337.map-eu8sxqx2');
+      mapdos.setView([19.43267,-99.133269], 5);
+      function addMarker(json){
+          var f=json;
+          var tam =f.length;
+          var i=0;
+          var geoJson=new Array();
+
+          for(i=0;i<tam;i++){
+            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [f[i].longitude,f[i].latitude]},"properties": {  "alert_id":f[i].alert_id,"description":f[i].mediaDescription ,"image": "/uploads/"+f[i].name+".png" ,"url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": f[i].descriptionAlert,"marker-color":"#CC0033" }}; 
+          }
+
+          map.markerLayer.on('layeradd', function(e) {
+                  var marker = e.layer,
+                      feature = marker.feature;
+                      
+                  var popupContent =  '<h4>'+feature.properties.description+'</h4><a target="_blank" class="popup" href="' + feature.properties.url + '">' +
+                                          '<img src="' + feature.properties.image + '">' +
+                                      '   <h5>' + feature.properties.city + '</h5>' +
+                                      '</a>';
+                  marker.bindPopup(popupContent,{
+                      closeButton: false,
+                      minWidth: 120
+                  });
+          });
+
+          map.markerLayer.setGeoJSON(geoJson);
+           
+
+        }
+
+       addMarker(!{JSON.stringify(data)});
+       map.setView([19.43267,-99.133269], 4);
+       
+
+       map.markerLayer.on('click', function(e) {     
+          
+       mapdos.setView(e.layer.getLatLng(), 15);
+                L.mapbox.markerLayer({
+                    type: 'Feature',
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [e.layer.getLatLng().lng , e.layer.getLatLng().lat]
+                    },
+                    properties: {
+                        title: '',
+                        description: 'Ubicación',
+                        'marker-size': 'small',
+                        "marker-color":"#CC0033" 
+                    }
+        }).addTo(mapdos);
+
+           $.ajax({
+                          type: "GET",
+                          url: "/alert/"+e.layer.feature.properties['alert_id'],
+                          data: "",
+                          success: function(datos){
+                            codeLatLng(datos[0].latitude+","+datos[0].longitude);
+                            $(".usuarios").html("");
+                            $("#coordenadas").html("");
+                            $(".usuarios").html("<img src=\"/uploads/"+datos[0].name+".png\"  class=\"foto\" ><div class=\"nombre\" > Nombre:"+ datos[0].name+" "+datos[0].FirstName+"</div>Medio:"+datos[0].mediaDescription+"<br>Tipo Alerta: "+datos[0].descriptionAlert+"<br>Coordenadas: lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude)+"<br>Dirección:<div id='direccion'></div><br>Dispositivo:Iphone 5"+"<br>Carrier:"+"Telcel");
+                            $("#coordenadas").html("lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude));
+                            $("#status").html('<a href="#" id="'+datos[0].alert_id +'" class="changeStatus" > Atendido </a>');
+                             var fotos="<h5>Imágenes Alerta</h5>";
+                             var fcount=datos[0].fotos.length;
+                             for(i=0;i<fcount;i++){
+                                 fotos += '<img src="/uploads/'+datos[0].fotos[i].url+'" width="100" heigth="200" />';
+                             }
+                             var counttraceGps=datos[0].trakingGPS.length;
+
+                             for(i=0;i<counttraceGps;i++){
 
 
+
+
+                                   mapdos.setView(e.layer.getLatLng(), 15);
+                                      L.mapbox.markerLayer({
+                                            type: 'Feature',
+                                            geometry: {
+                                                type: 'Point',
+                                                coordinates: [datos[0].trakingGPS[i].longitude , datos[0].trakingGPS[i].latitude]
+                                            },
+                                            properties: {
+                                                title: '',
+                                                description: 'Ubicación',
+                                                'marker-size': 'small',
+                                                "marker-color":"#CC0033" 
+                                             }
+                                         }).addTo(mapdos);
+
+
+                             }
+
+                              $("#area_entera").html(fotos);
+                          }
+                  }); 
+       });
+
+
+      $(".changeStatus").live("click",function(){
+       
+        var id= $(this).attr('id');
+         
+         $.ajax({
+                          type: "POST",
+                          url: "/changeStatus",
+                          data: "id="+id,
+                          success: function(datos){
+                              $("#area_entera").html("");
+                              $(".usuarios").html("");
+                               mapdos.setView([19.432679,-99.133236], 5);
+                               mapdos.markerLayer.eachLayer(  
+                                 function(l) { mapdos.markerLayer.removeLayer(l); }
+                               );
+
+                              return false;
+                          }
+                  }); 
+
+          return false;
+
+      });
+        
+              var socket  = io.connect('http://sspdemo.cloudapp.net');
+              socket.on('conectado', function(data) {
+                      console.log("conectado"+data);
+              });
+              socket.on('refresh', function(data) {
+                  addMarker(JSON.parse(data));     
+             
+              });
+
+             map.markerLayer.on('ready', function(e) {
+                    var markers = [];
+                    this.eachLayer(function(marker) { markers.push(marker); });
+                    //cycle(markers);
+             });
+
+            
+          /*
+            function cycle(markers) {
+                    var i = 0;
+                    function run() {
+                        if (++i > markers.length - 1) i = 0;
+                        map.setView(markers[i].getLatLng(), 12);
+                       
+
+                        mapdos.setView(markers[i].getLatLng(), 12);
+                        L.mapbox.markerLayer({
+                              type: 'Feature',
+                              geometry: {
+                                  type: 'Point',
+                                  coordinates: [markers[i].getLatLng().lng , markers[i].getLatLng().lat]
+                              },
+                              properties: {
+                                  title: '',
+                                  description: 'Ubicación',
+                                  'marker-size': 'large',
+                              }
+                       }).addTo(mapdos);
+
+                      markers[i].openPopup();
+                      window.setTimeout(run, 5000);
+                    }
+                    run();
+            }  
+            */
+          
+             $('#reset').click(function(){
+               //alert("..");
+                //mapdos.markerLayer.clearLayers();
+                mapdos.setView([19.432679,-99.133236], 5);
+                mapdos.markerLayer.eachLayer(  
+                   function(l) { mapdos.markerLayer.removeLayer(l); }
+                );
+
+
+             });
+
+
+
+
+
+             //Funcion para obtener la localizacion
+
+             function codeLatLng(latlng) {
+              var geocoder= new google.maps.Geocoder();
+                  var input = latlng;
+                  var latlngStr = input.split(",",2);
+                  var lat = parseFloat(latlngStr[0]);
+                  var lng = parseFloat(latlngStr[1]);
+                  var latlng = new google.maps.LatLng(lat, lng);
+                  geocoder.geocode({'latLng': latlng}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                      if (results[1]) {
+                      /*
+                        map.setZoom(11);
+                        marker = new google.maps.Marker({
+                            position: latlng,
+                            map: map
+                        });
+                        */
+                        $("#direccion").html(results[1].formatted_address);
+
+                         //infowindow.setContent(results[1].formatted_address);
+                        //infowindow.open(map, marker);
+                      }
+                    } else {
+                      alert("Geocoder failed due to: " + status);
+                    }
+                  });
+             }
+
+
+
+          
+
+  div(id="content",class="element information")
+
+
+          
+
+
+    
+   
+   
