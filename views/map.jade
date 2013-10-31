@@ -1,5 +1,17 @@
 extends layout
 block content
  script
-   alert("hola");
+   var map = null;
+   function initializeMaps(mapElement, mapOptions) {
+	   	var lat = mapOptions.centerLat || 0;
+	   	var lng = mapOptions.centerLng || 0;
+	   	$.extend(mapOptions, {
+	   	zoom: mapOptions.zoom || 10,
+	   	center: mapOptions.center || new google.maps.LatLng(lat,lng),
+	   	  mapTypeId: google.maps.MapTypeId.ROADMAP
+	   	});
+
+        return new google.maps.Map(mapElement, mapOptions);
+    }
+
 
