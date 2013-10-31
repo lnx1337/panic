@@ -54,7 +54,7 @@ block content
             icon: mapParameters.icon || 'http://bus-tops.com/static/img/map-icon.png'
         });
         
-        setMarkerEvents(marker, "http://bus-tops.com/", screenSlug, screenName, screenDescription, photo, map, ajaxParameters);
+        setMarkerEvents(marker, "http://bus-tops.com/", screenSlug, screenName, screenDescription, photo, map, ajaxParameters,alert_id);
         marker.setPosition(location);
         if( centerMap ) {
             map.setCenter(location);
@@ -404,7 +404,6 @@ block content
               null,
               mapParameters,f[i].alert_id
             );
-          console.log(f[i].alert_id);
 
 
           
