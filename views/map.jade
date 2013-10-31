@@ -10,12 +10,10 @@ block content
    	center: mapOptions.center || new google.maps.LatLng(lat,lng),
    	  mapTypeId: google.maps.MapTypeId.ROADMAP
    	});
-
         return new google.maps.Map(mapElement, mapOptions);
     }
-    /*
-     * geocoding / directions routing
-     */
+
+
     $.fn.putMarker = function(address, mapParameters, screenSlug, screenName, screenDescription, photo, centerMap, ajaxParameters) {
         var mapElement = $(this[0]).get(0);
     	var map = mapParameters.map == undefined ? initializeMaps(mapElement, mapParameters) : mapParameters.map;
