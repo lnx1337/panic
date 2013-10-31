@@ -20,9 +20,12 @@ block content
           .nombre 
           #coordenadas2
         #status   
-     .area_media  
+     .area_media
+
    
  #seccion2
+      button(id="full")
+        fullscreen
       #area_entera  
  #mapdos  
  
@@ -500,41 +503,12 @@ block content
              
         });
 
-        function toggleFullScreen() {
-          if ((document.fullScreenElement && document.fullScreenElement !== null) ||    // alternative standard method
-              (!document.mozFullScreen && !document.webkitIsFullScreen)) {               // current working methods
-            if (document.documentElement.requestFullScreen) {
-              document.documentElement.requestFullScreen();
-            } else if (document.documentElement.mozRequestFullScreen) {
-              document.documentElement.mozRequestFullScreen();
-            } else if (document.documentElement.webkitRequestFullScreen) {
-              document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
-            }
-          } else {
-            if (document.cancelFullScreen) {
-              document.cancelFullScreen();
-            } else if (document.mozCancelFullScreen) {
-              document.mozCancelFullScreen();
-            } else if (document.webkitCancelFullScreen) {
-              document.webkitCancelFullScreen();
-            }
-          }
-        }
-
-        document.addEventListener("keydown", function(e) {
-           if (e.keyCode == 27) {
-              if (document.cancelFullScreen) {
-                document.cancelFullScreen();
-              } else if (document.mozCancelFullScreen) {
-                document.mozCancelFullScreen();
-              } else if (document.webkitCancelFullScreen) {
-                document.webkitCancelFullScreen();
-              }
+        document.getElementById('full').addEventListener('click', function () {
+           if (screenfull.enabled) {
+                screenfull.request();
+           } else {
+             // Ignore or do something else
            }
-           document.location = jQuery('.galleria-thumblink').attr('href');
-        }, false);
+        });      
 
-        jQuery(SELECTOR).click(function(){
-            toggleFullScreen();
-        });  
  div(id="screen_map")
