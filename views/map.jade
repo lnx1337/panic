@@ -88,7 +88,7 @@ block content
         google.maps.event.addListener(marker, 'click', function() {
             if( ajaxParameters == undefined ) {
                 var url = screensUrl + screenSlug;
-                window.location.href = url;
+                //window.location.href = url;
             }
             else {
                 var url = ajaxParameters.url + "&screenSlug="+screenSlug;
@@ -106,7 +106,7 @@ block content
         });
         google.maps.event.addListener(marker, 'click', function() {
            
-            window.location.href = screensUrl + screenSlug;
+             //window.location.href = screensUrl + screenSlug;
              alert(photo+alert_id);
         });
 
