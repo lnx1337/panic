@@ -47,8 +47,8 @@ exports.map=function(req,res){
 .get('tbl_panic_alerts', function(err, results, fields) {
       
 
-      res.send({data:results});     
-    //res.render('index',{data:results});
+      //res.send({data:results});     
+     res.render('map',{data:results});
 
 
 });
