@@ -138,9 +138,9 @@ block content
                             
                              $("#area_entera").html(fotos);
                             
-                             var location = new google.maps.LatLng(datos[0].latitude,datos[0].longitude);
+                             
+                             map.setCenter(marker.getPosition());
                              map.setZoom(16);
-                             map.setCenter(localtion);                          
 
                           }
                   });    
