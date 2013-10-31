@@ -33,7 +33,7 @@ block content
     var lat = mapOptions.centerLat || 0;
     var lng = mapOptions.centerLng || 0;
     $.extend(mapOptions, {
-    zoom: mapOptions.zoom || 10,
+    zoom: mapOptions.zoom || 14,
     center: mapOptions.center || new google.maps.LatLng(lat,lng),
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
@@ -61,7 +61,7 @@ block content
         }
     };
 
-    
+
    $.fn.putScreens = function(mapParameters) { 
         var mapElement = $(this[0]).get(0);
         if( mapElement.tagName.toLowerCase() != "div" ) {
