@@ -616,6 +616,7 @@ block content
             $('body,html').animate({ scrollTop: 0 }, {'easing': 'easeOutExpo'});
         });
     }
+
     /*
      * /markers functions
      */
@@ -733,7 +734,6 @@ block content
         ]
       }
     ];
-
         var mapOptions = {
             'center': new google.maps.LatLng(21.371244,-100.905304)
         };
@@ -741,7 +741,6 @@ block content
         $("#screen_map").putScreens(mapOptions);
     map.setOptions({'styles': mapStyles});
       });
-
 
       $(function() {
         $( "#dialog" ).dialog( {
@@ -869,5 +868,6 @@ block content
         $(function() {
           $( ".button" ).button();
             $( "#id-date" ).datepicker();
-        });   
+        });  
+        alert(!{JSON.stringify(data)}); 
  div(id="screen_map")
