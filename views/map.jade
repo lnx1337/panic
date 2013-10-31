@@ -443,10 +443,35 @@ block content
 
 
           
-          }
+          } 
 
-          
-           
+        }
 
+        function codeLatLng(latlng) {
+              var geocoder= new google.maps.Geocoder();
+                  var input = latlng;
+                  var latlngStr = input.split(",",2);
+                  var lat = parseFloat(latlngStr[0]);
+                  var lng = parseFloat(latlngStr[1]);
+                  var latlng = new google.maps.LatLng(lat, lng);
+                  geocoder.geocode({'latLng': latlng}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                      if (results[1]) {
+                      /*
+                        map.setZoom(11);
+                        marker = new google.maps.Marker({
+                            position: latlng,
+                            map: map
+                        });
+                        */
+                        $("#direccion").html(results[1].formatted_address);
+
+                         //infowindow.setContent(results[1].formatted_address);
+                        //infowindow.open(map, marker);
+                      }
+                    } else {
+                      alert("Geocoder failed due to: " + status);
+                    }
+                  });
         }
  div(id="screen_map")
