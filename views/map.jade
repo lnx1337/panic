@@ -72,7 +72,7 @@ block content
           map = initializeMaps(mapElement, mapParameters);
           mapParameters['map']
     
-           addMarker(!{JSON.stringify(data)}); 
+           addMarker(!{JSON.stringify(data)},mapParameters); 
 
             address = {
               'latitude': "51.568861",
@@ -871,7 +871,7 @@ block content
             $( "#id-date" ).datepicker();
         });  
 
-        function addMarker(json){
+        function addMarker(json,mapParameters){
           var f=json;
           var tam =f.length;
           var i=0;
