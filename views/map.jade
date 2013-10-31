@@ -83,7 +83,7 @@ block content
      /*
      * markers functions
      */
-    function setMarkerEvents(marker, screensUrl, screenSlug, screenName, screenDescription, photo, map, ajaxParameters) {
+    function setMarkerEvents(marker, screensUrl, screenSlug, screenName, screenDescription, photo, map, ajaxParameters,alert_id) {
         
         google.maps.event.addListener(marker, 'click', function() {
             if( ajaxParameters == undefined ) {
