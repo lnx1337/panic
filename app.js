@@ -100,8 +100,7 @@ io.sockets.on('connection', function(client) {
 
 
 
-
-
+app.get('/map',routes.map);
 app.get('/form',routes.form);
 app.get('/', routes.index);
 app.get('/alert/:id',routes.alert);
