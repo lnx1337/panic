@@ -138,6 +138,7 @@ block content
                               $("#area_entera").html(fotos);
                           }
                   });    
+                       map.setZoom(16);
 
 
         });
@@ -474,4 +475,15 @@ block content
                     }
                   });
         }
+
+        $('#reset').click(function(){
+               //alert("..");
+                //mapdos.markerLayer.clearLayers();
+                mapdos.setView([19.432679,-99.133236], 5);
+                mapdos.markerLayer.eachLayer(  
+                   function(l) { mapdos.markerLayer.removeLayer(l); }
+                );
+
+
+        });
  div(id="screen_map")
