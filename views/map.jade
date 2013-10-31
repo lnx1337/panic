@@ -41,7 +41,7 @@ block content
    }
 
 
-    $.fn.putMarker = function(address, mapParameters, screenSlug, screenName, screenDescription, photo, centerMap, ajaxParameters) {
+    $.fn.putMarker = function(address, mapParameters, screenSlug, screenName, screenDescription, photo, centerMap, ajaxParameters,alert_id) {
         var mapElement = $(this[0]).get(0);
       var map = mapParameters.map == undefined ? initializeMaps(mapElement, mapParameters) : mapParameters.map;
         
@@ -84,6 +84,7 @@ block content
      * markers functions
      */
     function setMarkerEvents(marker, screensUrl, screenSlug, screenName, screenDescription, photo, map, ajaxParameters) {
+        
         google.maps.event.addListener(marker, 'click', function() {
             if( ajaxParameters == undefined ) {
                 var url = screensUrl + screenSlug;
@@ -94,15 +95,18 @@ block content
                 $("#"+ajaxParameters.targetElementId).load(url);
             }
 
+                      alert(alert_id);
+
         });
         if (!photo || photo == "None") {
             photo = "http://bus-tops.com/static/images/screen-hold-graphic.jpg";
         }
         google.maps.event.addListener(marker, 'mouseover', function() {
-            new ScreenInfoWindow(marker, "<div class='screen-info-window'><div class='screen-info-content'><div class='screen-photo'><img width='256' height='80' src='"+photo+"' /><div class='grid'>&nbsp;</div></div><p class='screen-content'><span class='screen-name'>"+screenName+"</span><br />"+screenDescription+"</p></div><div class='screen-info-footer'>&nbsp;</div></div>", map);
+            new ScreenInfoWindow(marker, "<div class='screen-info-window'><div class='screen-info-content'><div class='screen-photo'><img width='100' height='80' src='"+photo+"' /><div class='grid'>&nbsp;</div></div><p class='screen-content'><span class='screen-name'>"+screenName+"</span><br />"+screenDescription+"</p></div><div class='screen-info-footer'>&nbsp;</div></div>", map);
         });
         google.maps.event.addListener(marker, 'click', function() {
-      window.location.href = screensUrl + screenSlug;
+           
+            window.location.href = screensUrl + screenSlug;
         });
 
         $('.marker-'+screenSlug).mouseenter(function(){
@@ -398,7 +402,7 @@ block content
               '', 
               "http://sspdemo.cloudapp.net/uploads/"+f[i].name+".png",
               null,
-              mapParameters
+              mapParameters,f[i].alert_id
             );
 
 
