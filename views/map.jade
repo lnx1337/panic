@@ -72,7 +72,8 @@ block content
           map = initializeMaps(mapElement, mapParameters);
           mapParameters['map']
     
-    
+           addMarker(!{JSON.stringify(data)}); 
+
             address = {
               'latitude': "51.568861",
               'longitude': "-0.118318",
@@ -869,5 +870,39 @@ block content
           $( ".button" ).button();
             $( "#id-date" ).datepicker();
         });  
-        alert(!{JSON.stringify(data)}); 
+
+        function addMarker(json){
+          var f=json;
+          var tam =f.length;
+          var i=0;
+          var geoJson=new Array();
+
+          for(i=0;i<tam;i++){
+
+
+            address = {
+              'latitude': f[i].latitude,
+              'longitude': f[i].longitude,
+              'title': f[i].mediaDescription+f[i].descriptionAlert
+            };
+            
+            $(this).putMarker(
+              address,
+              {'map': map},
+              'almington', 
+              'Almington', 
+              '', 
+              "None",
+              null,
+              mapParameters
+            );
+
+
+          
+          }
+
+          
+           
+
+        }
  div(id="screen_map")
