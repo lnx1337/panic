@@ -1,258 +1,848 @@
 extends layout
 block content
-  #map  
-  #encabezado
-      h5 CENTRO NACIONAL DE ATENCION BOTON DE PANICO MONITOREO DE ALERTAS
-    #menu
-      .boton
-        img(src='/images/uno.png', alt='', id="reset")
-      .boton
-        img(src='/images/dos.png', alt='')
-      .boton
-        img(src='/images/tres.png', alt='')
-      .boton
-        img(src='/images/cuatro.png', alt='')
-      .boton
-        img(src='/images/cinco.png', alt='')
-  #seccion1
-     .area_media
-        .usuarios
-          .nombre 
-          #coordenadas2
-        #status   
-     .area_media  
-   
-  #seccion2
-      #area_entera  
-  #mapdos  
- 
-  #coordenadas 
+ script
+   var map = null;
+   function initializeMaps(mapElement, mapOptions) {
+   	var lat = mapOptions.centerLat || 0;
+   	var lng = mapOptions.centerLng || 0;
+   	$.extend(mapOptions, {
+   	zoom: mapOptions.zoom || 10,
+   	center: mapOptions.center || new google.maps.LatLng(lat,lng),
+   	  mapTypeId: google.maps.MapTypeId.ROADMAP
+   	});
 
-  script
-      var map = L.mapbox.map('mapdos', 'lnx1337.map-eu8sxqx2');
-      var mapdos = L.mapbox.map('map', 'lnx1337.map-eu8sxqx2');
-      mapdos.setView([19.43267,-99.133269], 5);
-      function addMarker(json){
-          var f=json;
-          var tam =f.length;
-          var i=0;
-          var geoJson=new Array();
+        return new google.maps.Map(mapElement, mapOptions);
+    }
+    /*
+     * geocoding / directions routing
+     */
+    $.fn.putMarker = function(address, mapParameters, screenSlug, screenName, screenDescription, photo, centerMap, ajaxParameters) {
+        var mapElement = $(this[0]).get(0);
+    	var map = mapParameters.map == undefined ? initializeMaps(mapElement, mapParameters) : mapParameters.map;
+        
+        var location = new google.maps.LatLng(address.latitude, address.longitude);
 
-          for(i=0;i<tam;i++){
-            geoJson[i]={type: 'Feature',"geometry": { "type": "Point", "coordinates": [f[i].longitude,f[i].latitude]},"properties": {  "alert_id":f[i].alert_id,"description":f[i].mediaDescription ,"image": "/uploads/"+f[i].name+".png" ,"url": "http://en.wikipedia.org/wiki/Washington,_D.C.","marker-symbol": "star","city": f[i].descriptionAlert,"marker-color":"#CC0033" }}; 
-          }
-
-          map.markerLayer.on('layeradd', function(e) {
-                  var marker = e.layer,
-                      feature = marker.feature;
-                      
-                  var popupContent =  '<h4>'+feature.properties.description+'</h4><a target="_blank" class="popup" href="' + feature.properties.url + '">' +
-                                          '<img src="' + feature.properties.image + '">' +
-                                      '   <h5>' + feature.properties.city + '</h5>' +
-                                      '</a>';
-                  marker.bindPopup(popupContent,{
-                      closeButton: false,
-                      minWidth: 120
-                  });
-          });
-
-          map.markerLayer.setGeoJSON(geoJson);
-           
-
+        var marker = new google.maps.Marker({
+            map: map,
+            title: address.title,
+            draggable: false,
+            icon: mapParameters.icon || 'http://bus-tops.com/static/img/map-icon.png'
+        });
+        
+        setMarkerEvents(marker, "http://bus-tops.com/", screenSlug, screenName, screenDescription, photo, map, ajaxParameters);
+        marker.setPosition(location);
+        if( centerMap ) {
+            map.setCenter(location);
+        }
+    };
+   $.fn.putScreens = function(mapParameters) { 
+        var mapElement = $(this[0]).get(0);
+        if( mapElement.tagName.toLowerCase() != "div" ) {
+            throw "drawRoute exception: only <div> tags are supported";
         }
 
-       addMarker(!{JSON.stringify(data)});
-       map.setView([19.43267,-99.133269], 4);
-       
-
-       map.markerLayer.on('click', function(e) {     
-          
-       mapdos.setView(e.layer.getLatLng(), 15);
-                L.mapbox.markerLayer({
-                    type: 'Feature',
-                    geometry: {
-                        type: 'Point',
-                        coordinates: [e.layer.getLatLng().lng , e.layer.getLatLng().lat]
-                    },
-                    properties: {
-                        title: '',
-                        description: 'Ubicación',
-                        'marker-size': 'small',
-                        "marker-color":"#CC0033" 
-                    }
-        }).addTo(mapdos);
-
-           $.ajax({
-                          type: "GET",
-                          url: "/alert/"+e.layer.feature.properties['alert_id'],
-                          data: "",
-                          success: function(datos){
-                            codeLatLng(datos[0].latitude+","+datos[0].longitude);
-                            $(".usuarios").html("");
-                            $("#coordenadas").html("");
-                            $(".usuarios").html("<img src=\"/uploads/"+datos[0].name+".png\"  class=\"foto\" ><div class=\"nombre\" > Nombre:"+ datos[0].name+" "+datos[0].FirstName+"</div>Medio:"+datos[0].mediaDescription+"<br>Tipo Alerta: "+datos[0].descriptionAlert+"<br>Coordenadas: lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude)+"<br>Dirección:<div id='direccion'></div><br>Dispositivo:Iphone 5"+"<br>Carrier:"+"Telcel");
-                            $("#coordenadas").html("lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude));
-                            $("#status").html('<a href="#" id="'+datos[0].alert_id +'" class="changeStatus" > Atendido </a>');
-                             var fotos="<h5>Imágenes Alerta</h5>";
-                             var fcount=datos[0].fotos.length;
-                             for(i=0;i<fcount;i++){
-                                 fotos += '<img src="/uploads/'+datos[0].fotos[i].url+'" width="100" heigth="200" />';
-                             }
-                             var counttraceGps=datos[0].trakingGPS.length;
-
-                             for(i=0;i<counttraceGps;i++){
-
-
-
-
-                                   mapdos.setView(e.layer.getLatLng(), 15);
-                                      L.mapbox.markerLayer({
-                                            type: 'Feature',
-                                            geometry: {
-                                                type: 'Point',
-                                                coordinates: [datos[0].trakingGPS[i].longitude , datos[0].trakingGPS[i].latitude]
-                                            },
-                                            properties: {
-                                                title: '',
-                                                description: 'Ubicación',
-                                                'marker-size': 'small',
-                                                "marker-color":"#CC0033" 
-                                             }
-                                         }).addTo(mapdos);
-
-
-                             }
-
-                              $("#area_entera").html(fotos);
-                          }
-                  }); 
-       });
-
-
-      $(".changeStatus").live("click",function(){
-       
-        var id= $(this).attr('id');
-         
-         $.ajax({
-                          type: "POST",
-                          url: "/changeStatus",
-                          data: "id="+id,
-                          success: function(datos){
-                              $("#area_entera").html("");
-                              $(".usuarios").html("");
-                               mapdos.setView([19.432679,-99.133236], 5);
-                               mapdos.markerLayer.eachLayer(  
-                                 function(l) { mapdos.markerLayer.removeLayer(l); }
-                               );
-
-                              return false;
-                          }
-                  }); 
-
-          return false;
-
-      });
-        
-              var socket  = io.connect('http://sspdemo.cloudapp.net');
-              socket.on('conectado', function(data) {
-                      console.log("conectado"+data);
-              });
-              socket.on('refresh', function(data) {
-                  addMarker(JSON.parse(data));     
-             
-              });
-
-             map.markerLayer.on('ready', function(e) {
-                    var markers = [];
-                    this.eachLayer(function(marker) { markers.push(marker); });
-                    //cycle(markers);
-             });
-
+		if(!map)
+        	map = initializeMaps(mapElement, mapParameters);
+        	mapParameters['map']
+		
+		
+            address = {
+            	'latitude': "51.568861",
+            	'longitude': "-0.118318",
+            	'title': "Almington"
+            };
             
-          /*
-            function cycle(markers) {
-                    var i = 0;
-                    function run() {
-                        if (++i > markers.length - 1) i = 0;
-                        map.setView(markers[i].getLatLng(), 12);
-                       
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'almington', 
+				'Almington', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.43628",
+            	'longitude': "-0.380359",
+            	'title': "Apex"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'apex', 
+				'Apex', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.536619",
+            	'longitude': "-0.08862",
+            	'title': "Baring"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'baring', 
+				'Baring', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.493041",
+            	'longitude': "0.094274",
+            	'title': "Boughton"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'boughton', 
+				'Boughton', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.363036",
+            	'longitude': "-0.103303",
+            	'title': "Bowling"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'bowling', 
+				'Bowling', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.601759",
+            	'longitude': "-0.288059",
+            	'title': "Brides"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'brides', 
+				'Brides', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.6216",
+            	'longitude': "-0.273296",
+            	'title': "Broadfields"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'broadfields', 
+				'Broadfields', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.58888",
+            	'longitude': "-0.283783",
+            	'title': "Cowbridge"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'cowbridge', 
+				'Cowbridge', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.506679",
+            	'longitude': "0.124444",
+            	'title': "Curlew"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'curlew', 
+				'Curlew', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.435685",
+            	'longitude': "-0.055532",
+            	'title': "Dartmouth"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'dartmouth', 
+				'Dartmouth', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.527958",
+            	'longitude': "-0.077881",
+            	'title': "Drysdale"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'drysdale', 
+				'Drysdale', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.54454",
+            	'longitude': "-0.07611",
+            	'title': "Forest"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'forest', 
+				'Forest', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.356474",
+            	'longitude': "-0.307757",
+            	'title': "Garrison"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'garrison', 
+				'Garrison', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.525213",
+            	'longitude': "-0.09951",
+            	'title': "Goswell"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'goswell', 
+				'Goswell', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.562985",
+            	'longitude': "-0.1793",
+            	'title': "Jack"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'jack', 
+				'Jack', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.508803",
+            	'longitude': "-0.134271",
+            	'title': "Jermyn"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'jermyn', 
+				'Jermyn', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.557566",
+            	'longitude': "-0.138917",
+            	'title': "Junction"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'junction', 
+				'Junction', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.584363",
+            	'longitude': "-0.282598",
+            	'title': "Kingsbury"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'kingsbury', 
+				'Kingsbury', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.551566",
+            	'longitude': "-0.185051",
+            	'title': "Langland"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'langland', 
+				'Langland', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.578523",
+            	'longitude': "-0.073085",
+            	'title': "Lealand"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'lealand', 
+				'Lealand', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.522389",
+            	'longitude': "0.048666",
+            	'title': "Lonsdale"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'lonsdale', 
+				'Lonsdale', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.420774",
+            	'longitude': "-0.151545",
+            	'title': "Nimrod"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'nimrod', 
+				'Nimrod', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.372691",
+            	'longitude': "0.087172",
+            	'title': "Orpington"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'orpington', 
+				'Orpington', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.514131",
+            	'longitude': "-0.410475",
+            	'title': "Precinct"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'precinct', 
+				'Precinct', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.595382",
+            	'longitude': "-0.233438",
+            	'title': "Southfields"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'southfields', 
+				'Southfields', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.489594",
+            	'longitude': "-0.014205",
+            	'title': "Spindrift"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'spindrift', 
+				'Spindrift', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.5206",
+            	'longitude': "-0.074673",
+            	'title': "Spitalfields"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'spitalfields', 
+				'Spitalfields', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.586503",
+            	'longitude': "-0.001953",
+            	'title': "Wood"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'wood', 
+				'Wood', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+            address = {
+            	'latitude': "51.575383",
+            	'longitude': "-0.203655",
+            	'title': "Woodstock"
+            };
+            
+			$(this).putMarker(
+				address,
+				{'map': map},
+				'woodstock', 
+				'Woodstock', 
+				'', 
+				"None",
+				null,
+				mapParameters
+			);
+		
+		
+		
+			
+	 }
 
-                        mapdos.setView(markers[i].getLatLng(), 12);
-                        L.mapbox.markerLayer({
-                              type: 'Feature',
-                              geometry: {
-                                  type: 'Point',
-                                  coordinates: [markers[i].getLatLng().lng , markers[i].getLatLng().lat]
-                              },
-                              properties: {
-                                  title: '',
-                                  description: 'Ubicación',
-                                  'marker-size': 'large',
-                              }
-                       }).addTo(mapdos);
+     /*
+     * /geocoding / directions routing
+     */
 
-                      markers[i].openPopup();
-                      window.setTimeout(run, 5000);
-                    }
-                    run();
-            }  
-            */
-          
-             $('#reset').click(function(){
-               //alert("..");
-                //mapdos.markerLayer.clearLayers();
-                mapdos.setView([19.432679,-99.133236], 5);
-                mapdos.markerLayer.eachLayer(  
-                   function(l) { mapdos.markerLayer.removeLayer(l); }
-                );
+     /*
+     * markers functions
+     */
+    function setMarkerEvents(marker, screensUrl, screenSlug, screenName, screenDescription, photo, map, ajaxParameters) {
+        google.maps.event.addListener(marker, 'click', function() {
+            if( ajaxParameters == undefined ) {
+                var url = screensUrl + screenSlug;
+                window.location.href = url;
+            }
+            else {
+                var url = ajaxParameters.url + "&screenSlug="+screenSlug;
+                $("#"+ajaxParameters.targetElementId).load(url);
+            }
 
+        });
+        if (!photo || photo == "None") {
+            photo = "http://bus-tops.com/static/images/screen-hold-graphic.jpg";
+        }
+        google.maps.event.addListener(marker, 'mouseover', function() {
+            new ScreenInfoWindow(marker, "<div class='screen-info-window'><div class='screen-info-content'><div class='screen-photo'><img width='256' height='80' src='"+photo+"' /><div class='grid'>&nbsp;</div></div><p class='screen-content'><span class='screen-name'>"+screenName+"</span><br />"+screenDescription+"</p></div><div class='screen-info-footer'>&nbsp;</div></div>", map);
+        });
+        google.maps.event.addListener(marker, 'click', function() {
+			window.location.href = screensUrl + screenSlug;
+        });
 
-             });
+        $('.marker-'+screenSlug).mouseenter(function(){
+            var infoWindow = new ScreenInfoWindow(marker, "<div class='screen-info-window'><div class='screen-info-content'><div class='screen-photo'><img width='256' height='80' src='"+photo+"' /><div class='grid'>&nbsp;</div></div><p class='screen-content'><span class='screen-name'>"+screenName+"</span><br />"+screenDescription+"</p></div><div class='screen-info-footer'>&nbsp;</div></div>", map);
+            $(this).data('infoWindow', infoWindow);
+        });
+        $('.marker-'+screenSlug).mouseout(function(){
+			var infoWindow = $(this).data('infoWindow');
+			infoWindow.setMap(null);
+        });
+        $('.see-marker-'+screenSlug).click(function(){
+			var infoWindow = $(this).data('infoWindow');
+			infoWindow.setMap(null);
+			infoWindow = new ScreenInfoWindow(marker, "<div class='screen-info-window'><div class='screen-info-content'><div class='screen-photo'><img width='256' height='80' src='"+photo+"' /><div class='grid'>&nbsp;</div></div><p class='screen-content'><span class='screen-name'>"+screenName+"</span><br />"+screenDescription+"</p></div><div class='screen-info-footer'>&nbsp;</div></div>", map);
+            setTimeout(function(){ infoWindow.setMap(null) }, 3000);
+            $('body,html').animate({ scrollTop: 0 }, {'easing': 'easeOutExpo'});
+        });
+    }
+    /*
+     * /markers functions
+     */
 
+    /*
+     * custom info window
+     */
+    function ScreenInfoWindow(marker, html, map) {
+        this._marker = marker;
+        this._html = html;
+        this._map = map;
+        this._div = null;
+        this.setMap(map);
+    }
+    ScreenInfoWindow.prototype = new google.maps.OverlayView();
 
+    ScreenInfoWindow.prototype.onAdd = function() {
+        var div = document.createElement("div");
+        div.style.position = "absolute";
+        div.innerHTML = this._html;
+        this._div = div;
+        // define info window close function and event
+        function closeInfoWindow(screenInfoWindow) {
+            return function() {
+                screenInfoWindow.setMap(null);
+            };
+        }
+        google.maps.event.addDomListener(this._marker, 'mouseout', closeInfoWindow(this));
+        // add info window to map (to float pane layer)
+        var panes = this.getPanes();
+        panes.floatPane.appendChild(div);
+    };
 
+    ScreenInfoWindow.prototype.draw = function () {
+        var marker = this._marker;
+        // marker coordinates as Point(x, y)
+        var markerOffset = this.getProjection().fromLatLngToDivPixel(marker.getPosition());
+        // position info window over marker
+        var div = this._div;
+        div.style.top = (markerOffset.y - 135) + "px";
+        div.style.left = (markerOffset.x - 133) + "px";
+    };
 
-
-             //Funcion para obtener la localizacion
-
-             function codeLatLng(latlng) {
-              var geocoder= new google.maps.Geocoder();
-                  var input = latlng;
-                  var latlngStr = input.split(",",2);
-                  var lat = parseFloat(latlngStr[0]);
-                  var lng = parseFloat(latlngStr[1]);
-                  var latlng = new google.maps.LatLng(lat, lng);
-                  geocoder.geocode({'latLng': latlng}, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                      if (results[1]) {
-                      /*
-                        map.setZoom(11);
-                        marker = new google.maps.Marker({
-                            position: latlng,
-                            map: map
-                        });
-                        */
-                        $("#direccion").html(results[1].formatted_address);
-
-                         //infowindow.setContent(results[1].formatted_address);
-                        //infowindow.open(map, marker);
-                      }
-                    } else {
-                      alert("Geocoder failed due to: " + status);
-                    }
-                  });
-             }
-
-
-
-          
-
-  div(id="content",class="element information")
-
-
-          
-
-
+    ScreenInfoWindow.prototype.onRemove = function() {
+        this._div.parentNode.removeChild(this._div);
+        this._div = null;
+    };
     
-   
-   
+    /*
+     * /custom screen info window
+     */
+
+    $(function() {
+            $( "input:submit, a, button", ".upload" ).button();
+            $( "button" )
+                    .click(function() {
+                    $( "#dialog" ).dialog( "open" );
+                    });
+    });
+    
+
+    $(document).ready(function () {
+		var mapStyles = [
+		  {
+		    featureType: 'all',
+		    elementType: 'geometry',
+		    stylers: [
+		      {hue: '#204150'},
+		      {lightness: '-85'}
+		    ]
+		  },
+		  {
+		    featureType: 'all',
+		    elementType: 'labels',
+		    stylers: [
+		      {hue: '#204150'},
+		      {invert_lightness: true}
+		    ]
+		  },
+		  {
+		    featureType: 'road',
+		    elementType: 'geometry',
+		    stylers: [
+		      {hue: '#204150'},
+		      {saturation: '-85'},
+		      {lightness: '20'}
+		    ]
+		  },
+		  {
+		    featureType: 'road',
+		    elementType: 'labels',
+		    stylers: [
+		      {visibility: 'off'}
+		    ]
+		  },
+		  {
+		    featureType: 'poi',
+		    stylers: [
+		      {hue: '#204150'},
+		      {lightness: '10'}
+		    ]
+		  },
+		  {
+		    featureType: 'landscape.natural',
+		    stylers: [
+		      {hue: '#204150'},
+		      {lightness: '-50'}
+		    ]
+		  },
+		  {
+		    featureType: 'water',
+		    stylers: [
+		      {hue: '#204150'},
+		      {lightness: '15'}
+		    ]
+		  }
+		];
+
+        var mapOptions = {
+            'center': new google.maps.LatLng(51.500152, -0.126236)
+        };
+
+        $("#screen_map").putScreens(mapOptions);
+		map.setOptions({'styles': mapStyles});
+      });
+
+
+      $(function() {
+    		$( "#dialog" ).dialog( {
+                autoOpen: false,
+                width: 460
+            } );
+
+            $( "#signin-link" )
+            		.click(function() {
+            		$( "#dialog" ).dialog( "open" );
+                    //$( "#dialog").dialog.parent().appendTo($("form:first"));
+                    });
+            /*
+            $( "#id_signin" )
+            		.click(function() {
+                     //  		$( "#dialog" ).dialog( "open" );
+                    $( "#dialog").dialog.parent().appendTo($("form:first"));
+                    });
+                    */
+            /*
+            $( "#id_continue" )
+            		.click(function() {
+                    //  	$( "#dialog" ).dialog( "open" );
+                    $( "#dialog").dialog.parent().appendTo($("form:first"));
+                    });
+                    */
+            $( "#signup-link" )
+            		.click(function() {
+            		$( "#dialog" ).dialog( "open" );
+                    });
+
+            var options = {
+                target: '#dialog',
+                success: function() {
+                $('#dialog').fadeIn('slow');
+                }
+            };
+
+            $('#signin-form').submit(function() {
+                $(this).ajaxSubmit(options);
+                return false;
+            });
+
+            $('#signup-form').submit(function() {
+                // check for default values
+                $('.ctrlHolder input').each(function(index) {
+                    var id = $(this).attr('id');
+                    var label = $("label[for='"+id+"']");
+                    if( $(this).val() == label.text() ) {
+                        $(this).val("");
+                    }
+                });
+                $(this).ajaxSubmit(options);
+                return false;
+            });
+
+            $("#autosel").live("change keyup", function () {
+                $("#role-form").submit();
+            });
+    	});
+
+        function hash(value) {
+            var hash = 5381;
+            value = value.toUpperCase();
+            for (var i = 0; i < value.length; i++) {
+                hash = ((hash << 5) + hash) + value.charCodeAt(i);
+            }
+            return "" + hash;
+        }
+
+        $.fn.selectRange = function(start, end) {
+            return this.each(function() {
+                if (this.setSelectionRange) {
+                    this.focus();
+                    this.setSelectionRange(start, end);
+                } else if (this.createTextRange) {
+                    var range = this.createTextRange();
+                    range.collapse(true);
+                    range.moveEnd('character', end);
+                    range.moveStart('character', start);
+                    range.select();
+                }
+            });
+        };
+
+        $(document).ready(function () {
+
+            $('.nav li').hover(
+                function () {
+                    //show its submenu
+                    $('ul', this).slideDown(100);
+
+                },
+                function () {
+                    //hide its submenu
+                    $('ul', this).slideUp(100);
+                }
+            );
+
+            $('.nav li').hover(
+                    function () {
+                        //show its submenu
+                        $('ul', this).slideDown(100);
+
+                    },
+                    function () {
+                        //hide its submenu
+                        $('ul', this).slideUp(100);
+                    }
+            );
+            $('#nav li').hover(
+                    function () {
+                        //show its submenu
+                        $('ul', this).slideDown(100);
+
+                    },
+                    function () {
+                        //hide its submenu
+                        $('ul', this).slideUp(100);
+                    }
+            );
+
+        });
+
+        $(function() {
+       		$( ".button" ).button();
+            $( "#id-date" ).datepicker();
+       	});   
+ 
+ div(id="screen_map",style="width:100%; height:100%")
+
