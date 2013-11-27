@@ -2,6 +2,7 @@ extends layout
 block content
  #bar
    h5 Centro  Nacional De Atención boton de Panico Monitoreo De Alertas
+   #reloj(style="font-size:20px;")
  #map  
     #menu
       .boton
@@ -31,6 +32,25 @@ block content
  
  #coordenadas  
  script
+   function startTime(){
+     today=new Date();
+     h=today.getHours();
+     m=today.getMinutes();
+     s=today.getSeconds();
+     m=checkTime(m);
+     s=checkTime(s);
+     document.getElementById('reloj').innerHTML=h+":"+m+":"+s;
+     t=setTimeout('startTime()',500);
+   }
+    
+   function checkTime(i)
+       {if (i<10) {i="0" + i;}return i;
+   }
+
+   window.onload=function(){
+    startTime();
+   }
+   
    var map = null;
    function initializeMaps(mapElement, mapOptions) {
     var lat = mapOptions.centerLat || 0;
