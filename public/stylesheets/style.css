@@ -19,7 +19,6 @@ body { margin:0; padding:0; background-color: rgb(0,31,42); text-rendering: opti
             background: #333;
             overflow: auto;
             opacity: 0;
-            -webkit-transition: opacity 0s $transitionSpeed;
             
             ul {
                 display: block;
@@ -39,9 +38,8 @@ body { margin:0; padding:0; background-color: rgb(0,31,42); text-rendering: opti
                     background: -webkit-linear-gradient(rgba(255,255,255,.02) 0%, rgba(0,0,0,.1) 100%);
                     background: -moz-linear-gradient(rgba(255,255,255,.02) 0%, rgba(0,0,0,.1) 100%);
             
-                    &.active {
                         background-color: $blue;
-                    }
+                
                 }
             }
         }
