@@ -70,6 +70,12 @@ body { margin:0; padding:0; background-color: rgb(0,31,42); text-rendering: opti
     display: none;
 }
 
+.clearfloat:after {
+    content: ""; 
+    display: table;
+    clear: both;
+}
+
         
         .contnot{ position: absolute;}
         #screen_map { opacity:0.8; position: fixed; background-color:rgb(7,7,21); top:47%;   margin-left:25%;  width:47%; height:41% }
