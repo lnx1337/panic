@@ -13,8 +13,8 @@ block content
          img(src='/uploads/Mario.png', alt='', width="50", height="30")
          myIDs   = ['afoo', 'abar']; 
          myArray = ['foo', 'bar'];
-         each button_id, i in myIDs
-               button(id="#{button_id}", onclick="yourFunctionHere();") #{myArray[i]}
+         each dato in data
+               button(id="#{dato}", onclick="yourFunctionHere();") #{dato}
          
      
      li  
