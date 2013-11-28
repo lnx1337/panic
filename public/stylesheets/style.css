@@ -7,7 +7,7 @@ body { margin:0; padding:0; background-color: rgb(0,31,42); text-rendering: opti
         #logos{position: fixed; top:0; margin-left:91%; background-color: #FFFFFF}
         #menuleft {
             position: fixed;
-            width: 20%;  height: 100%; 
+            width: 19%;  height: 100%; 
 
         }
         #notifications{
