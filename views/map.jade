@@ -10,7 +10,7 @@ block content
  #leftNav
    ul(class="clearfloat")
     each dato in data
-     li(class="m-menu")
+     li(class="m-menu alerta", id="#{dato.alert_id}")
          img(src='/uploads/'+"#{dato.name}"+'.png', alt='', width="50", height="30") 
          datos #{dato.name+" "+dato.FirstName+" "+dato.descriptionAlert }
 
@@ -531,6 +531,45 @@ block content
                   addMarker(JSON.parse(data));     
              
         });
+
+        $(".alert").click(function(){
+              
+              var alert_id=$(this).attr('id');
+              
+              $.ajax({
+                          type: "GET",
+                          url: "/alert/"+alert_id,
+                          data: "",
+                          success: function(datos){
+                            codeLatLng(datos[0].latitude+","+datos[0].longitude);
+                            $(".usuarios").html("");
+                            $("#coordenadas").html("");
+                            $(".usuarios").html("<img src=\"/uploads/"+datos[0].name+".png\"  class=\"foto\" ><div class=\"nombre\" > Nombre:"+ datos[0].name+" "+datos[0].FirstName+"</div>Medio:"+datos[0].mediaDescription+"<br>Tipo Alerta: "+datos[0].descriptionAlert+"<br>Coordenadas: lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude)+"<br>Dirección:<div id='direccion'></div><br>Dispositivo:Iphone 5"+"<br>Carrier:"+"Telcel");
+                            $("#coordenadas").html("lat:"+ convertLat(datos[0].latitude)+" lng:"+ convertLng(datos[0].longitude));
+                            $("#status").html('<a href="#" id="'+datos[0].alert_id +'" class="changeStatus" > Atendido </a>');
+                             var fotos="<h5>Imágenes Alerta</h5>";
+                             var fcount=datos[0].fotos.length;
+                             for(i=0;i<fcount;i++){
+                                 fotos += '<img src="/uploads/'+datos[0].fotos[i].url+'" width="100" heigth="200" />';
+                             }
+                             var counttraceGps=datos[0].trakingGPS.length;
+
+                             for(i=0;i<counttraceGps;i++){
+
+                                   console.log(datos[0].trakingGPS[i].longitude+ datos[0].trakingGPS[i].latitude) ;
+
+
+                             }
+
+                            
+                             $("#area_entera").html(fotos);
+                             map.setCenter(marker.getPosition());
+                             map.setZoom(15);
+
+                          }
+                  }); 
+
+        });      
 
         document.getElementById('full').addEventListener('click', function () {
            if (screenfull.enabled) {
