@@ -20,8 +20,8 @@ body { margin:0; padding:0; background-color: rgb(0,31,42); text-rendering: opti
         padding:2px;
         border:1px solid#CCCCCC;
         }
-        #screen_map { opacity:0.8; position: fixed; background-color:rgb(7,7,21); top:41%;   margin-left:19%;  width:47%; height:47% }
-        #seccion1 { position:absolute; top:10%; margin-left:22%; width:17%; height: 40%; background-color: rgb(7,7,21); }
+        #screen_map { opacity:0.8; position: fixed; background-color:rgb(7,7,21); top:47%;   margin-left:25%;  width:47%; height:41% }
+        #seccion1 { position:absolute; top:10%; margin-left:31%; width:17%; height: 40%; background-color: rgb(7,7,21); }
         #seccion2 { position:absolute; top:10%; margin-left:48%; width:17%; height: 40%; background-color: rgb(7,7,21); padding-bottom: 3px;}
         #mapdos   { position:fixed; top:50%; margin-left:66%; width:34%; bottom: -5%; margin-top: 6px;}
         #coordenadas{ opacity:0.8; position: fixed; background-color:rgb(7,7,21); width:15%; height:5%; display:inline-block; margin-left:35%; top:46%; font-size: 1.0em;  z-index:30;}
