@@ -20,6 +20,7 @@ body { margin:0; padding:0; background-color: rgb(0,31,42); text-rendering: opti
         padding:2px;
         border:1px solid#CCCCCC;
         }
+        .textonot{position: fixed;  }
         #screen_map { opacity:0.8; position: fixed; background-color:rgb(7,7,21); top:47%;   margin-left:25%;  width:47%; height:41% }
         #seccion1 { position:absolute; top:10%; margin-left:31%; width:17%; height: 40%; background-color: rgb(7,7,21); }
         #seccion2 { position:absolute; top:10%; margin-left:48%; width:17%; height: 40%; background-color: rgb(7,7,21); padding-bottom: 3px;}
