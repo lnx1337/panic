@@ -17,7 +17,7 @@ body { margin:0; padding:0; background-color: rgb(0,31,42); text-rendering: opti
         
         #leftNav ul li a{ text-decoration:none;padding-top:5px; height:19px; width:226px; text-indent:14px; background:#cad2df; color:#364e70; list-style-type:none; position:absolute;border-left:5px solid #828fa6;}
         #leftNav ul li a:hover{text-decoration:underline; font-weight:bold; padding-top:5px; height:19px; width:226px; background:#394a63; color:#cad2df; border-left:5px solid #1c3552;}
-        #leftNav ul li img { width:30px; height: 30px; }
+        #leftNav ul li img { width:25px; height: 25px; }
         .contnot{ position: absolute;}
         #screen_map { opacity:0.8; position: fixed; background-color:rgb(7,7,21); top:47%;   margin-left:25%;  width:47%; height:41% }
         #seccion1 { position:absolute; top:10%; margin-left:31%; width:17%; height: 40%; background-color: rgb(7,7,21); }
