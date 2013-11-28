@@ -563,7 +563,7 @@ block content
 
                             
                              $("#area_entera").html(fotos);
-                            // map.setCenter(marker.getPosition());
+                             map.setCenter(new google.maps.LatLng(datos[0].trakingGPS[i].latitude, datos[0].trakingGPS[i].longitude))
                              map.setZoom(15);
 
                           }
