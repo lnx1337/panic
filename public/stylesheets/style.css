@@ -10,7 +10,7 @@ body { margin:0; padding:0; background-color: rgb(0,31,42); text-rendering: opti
             width: 20%;  height: 100%; 
 
         }
-        #notications{
+        #notifications{
           list-style:none;
         }
         #screen_map { opacity:0.8; position: fixed; background-color:rgb(7,7,21); top:41%;   margin-left:19%;  width:47%; height:47% }
